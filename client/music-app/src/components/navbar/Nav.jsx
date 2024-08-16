@@ -5,21 +5,22 @@ function Nav() {
   return (
     <div>
       <nav className="navbar">
-        <ul>
-          <div className="nav-l">
-            <li>Discover</li>
-            <li>My Library</li>
-            <li>Radio</li>
-          </div>
+        {/* navlists */}
+        <ul className="nav-l">
+          <li>Discover</li>
+          <li>My Library</li>
+          <li>Radio</li>
         </ul>
-        <div className="nav-r">
-          <div className="search">
-            <input type="text" placeholder="Search Music" />
-          </div>
-          <div className="profile">
-            <button>Log In</button>
-            dp
-          </div>
+
+        {/* search */}
+        <div className="search">
+          <input type="text" placeholder="Search Music" />
+        </div>
+
+        {/* login n dp */}
+        <div className="profile">
+          <button>Log In</button>
+          <span className="navuser">dp</span>
         </div>
       </nav>
     </div>

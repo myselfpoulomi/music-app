@@ -1,73 +1,53 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'sans-serif';
-}
-html,body{
-    height: 100vh;
-    width: 100%;
-}
-
 .navbar {
-    width: 100%;
-    max-height: fit-content ;
-    display: flex;
-    justify-content: space-between;
-    background-color: rgb(157, 185, 185);
-    align-items: center;
-    padding: 20px;
-    
+  width: 100%;
+  max-height: fit-content;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(157, 185, 185);
+  align-items: center;
+  padding: 20px;
 }
 
 .nav-l {
-    display: flex;
-    list-style: none;
-    justify-content: space-between;
-    gap : 2rem;
-    font-size: x-large;
-}
-
-.nav-r {
-    display: flex;
-    justify-content: end;
-    gap : 4rem;
-    align-items: center;
-    width: 850px;
-    max-height: fit-content ;
+  display: flex;
+  list-style: none;
+  justify-content: space-between;
+  gap: 2rem;
+  font-size: x-large;
 }
 
 .search {
-    width: 300%;
-    height: 40px;
+  width: 500px;
+  height: 40px;
 }
 
 .search input {
-    height: 100%;
-    width: 100%;
-    border-radius: 10px;
-    border: none;
-    font-size: larger;
-    padding: 8px;
-}
-
-.profile {
-    display: flex;
-    gap : 2rem;
-    width: 300%;
-    height: 40px;
-    align-items: center;
-   
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  border: none;
+  font-size: larger;
+  padding: 8px;
+  padding-left: 20px;
+  padding-right: 20px;
+  outline: none;
 }
 
 .profile button {
-    background-color: black;
-    color: white;
-    padding: 8px;
-    border: none;
-    border-radius: 10px;
-    height: 100%;
-    width: 20%;
-    font-size: large;
+  background-color: black;
+  color: white;
+  padding: 8px;
+  border: none;
+  border-radius: 10px;
+  height: 100%;
+  width: 100px;
+  font-size: large;
 }
-
+.navuser {
+  padding: 10px;
+  height: 100px;
+  width: 100px;
+  border: 1px solid black;
+  border-radius: 100%;
+  margin-left: 10px;
+}
