@@ -1,0 +1,27 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100vh;
+  width: 100%;
+}
+
+.container {
+  height : 100vh;
+  width: 100%;
+  display: flex;
+}
+
+.main-left {
+  width: 20%;
+  background-color: aqua;
+
+}
+
+.main-right {
+  width: 80%;
+  background-color: rgb(228, 228, 17);
+}
