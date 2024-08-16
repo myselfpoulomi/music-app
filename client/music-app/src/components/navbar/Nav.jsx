@@ -14,7 +14,7 @@ function Nav() {
         </ul>
         <div className="nav-r">
           <div className="search">
-            <input type="text" placeholder="Search Music"/>
+            <input type="text" placeholder="Search Music" />
           </div>
           <div className="profile">
             <button>Log In</button>
@@ -27,3 +27,5 @@ function Nav() {
 }
 
 export default Nav;
+
+// love you Ritu🥺❤️
