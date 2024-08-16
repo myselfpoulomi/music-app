@@ -29,4 +29,3 @@ function Nav() {
 
 export default Nav;
 
-// love you Ritu🥺❤️
