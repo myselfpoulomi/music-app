@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import artistRouter from './router/artistRouter.js';
 
 dotenv.config();
 
@@ -8,9 +9,7 @@ const app = express()
 const PORT = process.env.PORT || 5101;
 const MONGO_URL = process.env.MONGO_URL
 
-app.get('/', (req, res) => {
-    res.send('Hello, World!');
-});
+app.use("/",artistRouter)
 
 mongoose.connect(MONGO_URL).then(() => {
     app.listen(PORT, () => {
