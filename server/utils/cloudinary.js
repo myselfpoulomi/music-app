@@ -31,6 +31,19 @@ const uploadOnCloudinary = async (localFilePath, subfolderName) => {
     }
 }
 
+const deleteImageFromCloudinary = async (url) => {
+    try {
+        const parts = url.split("/")
+        const last = parts[parts.length - 1].split(".")
+        const publicId = parts[parts.length - 3] + "/" + parts[parts.length - 2] + "/" + last[0]
+        const response = await cloudinary.uploader.destroy(publicId);
+        return response;
+    } catch (error) {
+        console.log("Error deleting file from Cloudinary", error);
+        return null;
+    }
+}
+
 const deleteMp3FromCloudinary = async (url) => {
     try {
         const urlParts = url.split('/');
@@ -46,4 +59,4 @@ const deleteMp3FromCloudinary = async (url) => {
     }
 };
 
-export { uploadOnCloudinary, deleteMp3FromCloudinary }
+export { uploadOnCloudinary, deleteImageFromCloudinary, deleteMp3FromCloudinary }
