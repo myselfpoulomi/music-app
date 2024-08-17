@@ -1,0 +1,35 @@
+# Node modules
+node_modules/
+
+# Environment variables
+.env
+
+# Logs
+*.log
+logs/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# NPM package lock files (optional, include if you want to ignore package-lock.json or yarn.lock)
+package-lock.json
+yarn.lock
+
+# Coverage reports (if using testing frameworks that generate coverage reports)
+coverage/
+
+# Build output (if applicable)
+dist/
+build/
+
+# IDE/editor settings
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
