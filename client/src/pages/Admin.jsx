@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "../components/admin/Admin.css";
+import { useNavigate } from "react-router-dom";
 
 function Admin() {
+  const navigate = useNavigate();
   const [navList, setNavList] = useState([
     { name: "Add Artist", path: "/admin/add-artist" },
     { name: "Update Artist", path: "/admin/update-artist" },
@@ -18,8 +20,15 @@ function Admin() {
           <h3>Welcome Admin</h3>
           <div className="adminList">
             {navList.map((item, index) => {
-              console.log(item);
-              return <p>{item.name}</p>;
+              return (
+                <p
+                  onClick={()=> {
+                    navigate(item.path)
+                  }}
+                >
+                  {item.name}
+                </p>
+              );
             })}
           </div>
         </div>
