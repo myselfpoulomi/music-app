@@ -54,4 +54,43 @@ async function getAllArtist(req, res) {
     }
 }
 
-export { addArtist, deleteAritst, getAllArtist }
+async function updateArtist(req, res) {
+    try {
+        const { artistid } = req.params
+        const { name } = req.body
+        const filepath = req.file?.path;
+        const updateData = {};
+        if (name) {
+            updateData.name = name;
+        }
+        if (filepath) {
+            const artistRes = await artistModel.findById(artistid);
+            if (artistRes && artistRes.image) {
+                await deleteImageFromCloudinary(artistRes.image);
+            }
+            const cloudinaryResponse = await uploadOnCloudinary(filepath, "artists");
+            updateData.image = cloudinaryResponse.url;
+        }
+        const updatedArtist = await artistModel.findByIdAndUpdate(artistid, updateData, { new: true });
+        res.status(200).json({ msg: "Artist updated successfully", updatedArtist })
+    } catch (error) {
+        console.error("Error updating artist:", error);
+        res.status(500).json({ msg: "An error occurred while updating the artist" });
+    }
+}
+
+async function getArtistById(req, res) {
+    try {
+        const { artistid } = req.params
+        const artist = await artistModel.findById(artistid)
+        if (!artist) {
+            return res.status(400).json({ msg: "Artist not found" })
+        }
+        res.status(200).json({ artist })
+    } catch (error) {
+        console.error("Error finding artist:", error);
+        res.status(500).json({ msg: "An error occurred while finding the artist" });
+    }
+}
+
+export { addArtist, deleteAritst, getAllArtist, updateArtist, getArtistById }
