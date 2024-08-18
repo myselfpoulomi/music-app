@@ -1,11 +1,13 @@
 .navbar {
   width: 100%;
-  max-height: fit-content;
+  height: 100px;
   display: flex;
   justify-content: space-between;
-  background-color: rgb(157, 185, 185);
+  background-color: rgba(207, 219, 219, 0.031);
   align-items: center;
   padding: 20px;
+
+  background-color: rgba(19, 18, 17, 0.183);
 }
 
 .nav-l {
@@ -14,42 +16,86 @@
   justify-content: space-between;
   gap: 2rem;
   font-size: x-large;
+  color: white;
+}
+
+.nav-l li {
+  transition: color 0.3s ease-in-out, text-decoration-color 0.3s ease-in-out;
+}
+
+.nav-l li:hover {
+  color: rgb(6, 104, 104);
+  text-decoration: underline;
+  text-decoration-color: rgba(6, 104, 104);
+  cursor: pointer;
 }
 
 .search {
   width: 500px;
   height: 40px;
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.205);
+  padding-left: 20px;
+  font-size: larger;
+  align-items: center;
+}
+.search span {
+  font-size: larger;
+  position: relative;
+  top: 3px;
+  color: rgb(8, 144, 144);
 }
 
 .search input {
   height: 100%;
   width: 100%;
-  border-radius: 10px;
-  border: none;
-  font-size: larger;
   padding: 8px;
-  padding-left: 20px;
   padding-right: 20px;
   outline: none;
+  background-color: transparent;
+  border: none;
+  font-size: larger;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
 }
 
 .profile button {
-  background-color: black;
+  background-color: rgb(6, 104, 104);
   color: white;
-  padding: 8px;
+  padding: 15px;
   border: none;
   border-radius: 10px;
   height: 100%;
   width: 100px;
   font-size: large;
+  transition:  0.3s ease-in-out ;
 }
+
+.profile button:hover {
+  background-color: rgb(10, 71, 71);
+  cursor: pointer;
+}
+
 .navuser {
   padding: 10px;
   height: 100px;
   width: 100px;
-  border: 1px solid black;
-  border-radius: 100%;
   margin-left: 30px;
-  margin-right: 50px;
+  margin-right: 20px;
+  font-size: 40px;
+  display: flex;
+  align-items: center;
+  color: white;
+  transition: color 0.3s ease;
 }
 
+.navuser:hover {
+  color: rgb(6, 104, 104);
+  cursor: pointer;
+}

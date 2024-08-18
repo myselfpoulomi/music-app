@@ -1,7 +1,14 @@
 import React from "react";
 import "./Nav.css";
+import { IoSearchSharp } from "react-icons/io5";
+import { CgProfile } from "react-icons/cg";
+import { useNavigate } from "react-router-dom"
 
 function Nav() {
+  const navigate = useNavigate()
+  const handleLogin = () => {
+    navigate("/login")
+  }
   return (
     <div>
       <nav className="navbar">
@@ -14,13 +21,16 @@ function Nav() {
 
         {/* search */}
         <div className="search">
+          <span><IoSearchSharp /></span>
           <input type="text" placeholder="Search Music" />
         </div>
 
         {/* login n dp */}
         <div className="profile">
-          <button>Log In</button>
-          <span className="navuser">dp</span>
+          <button onClick={handleLogin}>Log In</button>
+          <span className="navuser">
+          <CgProfile />
+          </span>
         </div>
       </nav>
     </div>
@@ -28,4 +38,3 @@ function Nav() {
 }
 
 export default Nav;
-

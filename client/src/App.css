@@ -18,11 +18,11 @@ body {
 
 .main-left {
   width: 20%;
-  background-color: aqua;
+  background-color: rgb(6, 104, 104);;
 
 }
 
 .main-right {
   width: 80%;
-  background-color: rgb(228, 228, 17);
+  background-color: rgb(58, 55, 55);
 }
