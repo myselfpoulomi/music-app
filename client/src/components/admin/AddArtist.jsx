@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { IoLogoHackernews } from "react-icons/io5";
 // import { toast } from "react-toastify";
+import axios from 'axios'
 
 function AddArtist() {
   const [name, setname] = useState("");
@@ -14,17 +16,30 @@ function AddArtist() {
     else alert ("inert image only");
   };
 
-  const handleAddArtist = () => {
+  const handleAddArtist = async () => {
     if (name == "" || file == null) {
         alert ("put name and choose file");
       return;
     }
-    console.log(name, file);
+    const formData = new FormData ();
+    formData.append('name' , name);
+    formData.append('file', file);
+    try {
+        const response = await axios.post("http://localhost:5100/admin/addartist",formData);
+        if (response.status==200) {
+            alert ("Artist Added");
+        } 
+        console.log(response);
+        
+    } catch (error) {
+    console.log("error while adding artist" , error);
+
+    }
   };
   return (
     <div>
-      <input type="text" onChange={handleName} />
-      <input type="file" onChange={handleFileChange} />
+      <input type="text" onChange={handleName}  value={name}/>
+      <input type="file" onChange={handleFileChange}/>
       <button onClick={handleAddArtist}>Add Artist</button>
     </div>
   );
