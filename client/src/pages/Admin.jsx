@@ -28,6 +28,7 @@ function Admin() {
             {navList.map((item, index) => {
               return (
                 <p
+                key={index}
                   onClick={()=> {
                     navigate(item.path)
                   }}
