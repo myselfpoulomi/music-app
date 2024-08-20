@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../components/admin/Admin.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , Routes , Route } from "react-router-dom";
+import AddArtist from "../components/admin/AddArtist";
 
 function Admin() {
   const navigate = useNavigate();
@@ -35,6 +36,10 @@ function Admin() {
         <button className="logoutbtn">Logout</button>
       </div>
       <div className="rightContainer"></div>
+      <Routes>
+        <Route path="/add-artist" element={<AddArtist />} />
+        
+      </Routes>
     </div>
   );
 }
