@@ -4,6 +4,7 @@
     /* background-color: black; */
     display: flex;
     color: white;
+    font-family: 'sans-serif';
 }
 
 .adminContanier .leftContainer {
@@ -28,12 +29,26 @@
     height: 50px;
     width: 50%;
     border-radius: 10px;
+    font-size: large;
+    border : none;
+    transition:  0.3s ease-in-out;
 }
+
+.logoutbtn:hover {
+    cursor: pointer;
+    background-color: rgb(154, 204, 247);
+}
+
 .adminList{
     margin-top: 3rem;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    font-size: 20px;
+    font-size: 30px;
+    gap : 3rem;
     cursor: pointer;
+}
+
+.leftContainer h2 {
+    font-size: 40px;
 }

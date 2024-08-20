@@ -17,7 +17,7 @@ function Admin() {
     <div className="adminContanier">
       <div className="leftContainer">
         <div className="">
-          <h3>Welcome Admin</h3>
+          <h2>Welcome Admin</h2>
           <div className="adminList">
             {navList.map((item, index) => {
               return (
