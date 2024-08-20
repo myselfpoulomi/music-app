@@ -1,12 +1,17 @@
 .artistcards {
     height: 100%;
     width: 200px;
-    border: 1px solid red;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     color: white;
+    transition: transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1),
+                box-shadow 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);;
+    cursor: pointer;
+    border: 2px solid transparent; 
+   
+   
 }
 
 .artistcards img {
@@ -15,4 +20,12 @@
     width: 150px;
     margin-bottom: 20px;
     object-fit: cover;
+}
+
+.artistcards:hover {
+    transform: scale(1.1); /* Zooms in */
+    background-color: rgba(31, 18, 18, 0.252);
+    border: 0.1px solid rgba(255, 255, 255, 0.127);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
