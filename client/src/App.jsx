@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import Admin from "./pages/Admin";
 import Cart from "./pages/Cart";
 import Login from "./pages/Login";
-import ToastifyContainer from "./components/toastify/ToastifyContainer.jsx"
+// import ToastiContainer from "./components/toastify/ToastifyContainer.jsx"
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
         <Route  path="/Login" element={<Login />}/>
       </Routes>
 
-      <ToastifyContainer />
+      {/* <ToastiContainer /> */}
     </div>
   );
 }

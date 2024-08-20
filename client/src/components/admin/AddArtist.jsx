@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 
 function AddArtist() {
   const [name, setname] = useState("");
@@ -11,12 +11,12 @@ function AddArtist() {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file.type.startsWith("image/")) setfile(file);
-    else toast.warn ("inert image only");
+    else alert ("inert image only");
   };
 
   const handleAddArtist = () => {
     if (name == "" || file == null) {
-        toast.warn ("put name and choose file");
+        alert ("put name and choose file");
       return;
     }
     console.log(name, file);
