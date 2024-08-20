@@ -39,11 +39,13 @@ function AddArtist() {
     }
   };
   return (
-    <div className="ArtistContainer">
+    <div>
+      <div className="AddArtistContainer">
       <h2 className="addArtistHeadline">Add Artist</h2>
       <input className="inputname" type="text" onChange={handleName}  value={name}/>
       <input className="inputfile" type="file" onChange={handleFileChange}/>
       <button className="addArtistBtn" onClick={handleAddArtist}>Add Artist</button>
+    </div>
     </div>
   );
 }

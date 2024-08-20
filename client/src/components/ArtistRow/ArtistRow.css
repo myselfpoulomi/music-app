@@ -1,0 +1,43 @@
+.ArtistRow {
+    border: 2px solid white;
+    height : 300px;
+    width: 100%;
+}
+
+.headingForArtist {
+    color : white;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.headingForArtist h2 {
+    padding-left: 10px;
+    font-size: x-large;
+}
+
+.arrows {
+    padding-right: 20px;
+    font-size: small;
+    display: flex;
+    gap:20px;
+}
+
+
+.ArtistProfile {
+    border: 1px solid blue;
+    margin-top: 20px;
+    height: 78%;
+}
+
+.ArtistProfile {
+    display: flex;
+    gap : 1rem;
+    transition: transform 1.7s cubic-bezier(0.25, 0.8, 0.25, 1);
+    cursor: pointer;
+}
+
+.artistcards:hover {
+    transform: scale(1.1); /* Zooms in */
+}
+
