@@ -1,11 +1,11 @@
 import React from "react";
 import "./Artistcard.css";
 
-function Artistcard() {
+function Artistcard(item,index) {
   return <div className="artistcards">
-    <img src="https://w0.peakpx.com/wallpaper/97/713/HD-wallpaper-arjith-singh-bollywood-singer.jpg" alt="" />
-    <h5>Arijit Singh</h5>
-    <p>Artist</p>
+    <img src={item.image} alt="" />
+    <h5>{item.name}</h5>
+    
   </div>
 }
 

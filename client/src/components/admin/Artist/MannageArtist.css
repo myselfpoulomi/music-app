@@ -1,4 +1,4 @@
-.ArtistContainer {
+.AddArtistContainer {
     height: 100vh;
     width: 100%;
     display: flex;
@@ -13,7 +13,7 @@
 }
 
 
-.ArtistContainer .inputname {
+.AddArtistContainer .inputname {
     height: 30px;
     width: 200px;
     border-radius: 5px;
