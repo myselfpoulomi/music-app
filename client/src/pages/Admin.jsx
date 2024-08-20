@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import "../components/admin/Admin.css";
 import { useNavigate , Routes , Route } from "react-router-dom";
 import AddArtist from "../components/admin/AddArtist";
+import UpdateArtist from "../components/admin/UpdateArtist";
+import AddAlbum from "../components/admin/AddAlbum";
+import UpdateAlbum from "../components/admin/UpdateAlbum";
+import AddSong from "../components/admin/AddSong";
+import UpdateSong from "../components/admin/UpdateSong";
 
 function Admin() {
   const navigate = useNavigate();
@@ -35,11 +40,17 @@ function Admin() {
         </div>
         <button className="logoutbtn">Logout</button>
       </div>
-      <div className="rightContainer"></div>
+      <div className="rightContainer">
       <Routes>
         <Route path="/add-artist" element={<AddArtist />} />
+        <Route path="/update-artist" element={<UpdateArtist />} />
+        <Route path="/add-album" element={<AddAlbum />} />
+        <Route path="/update-album" element={<UpdateAlbum />} />
+        <Route path="/add-song" element={<AddSong />} />
+        <Route path="/update-song" element={<UpdateSong />} />
         
       </Routes>
+      </div>
     </div>
   );
 }
