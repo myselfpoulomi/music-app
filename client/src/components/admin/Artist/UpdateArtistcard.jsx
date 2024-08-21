@@ -36,10 +36,8 @@ function UpdateArtistcard({ name, image, id }) {
       return;
     }
     const formData = new FormData();
-    if (artistname!=="")
-    formData.append("name", artistname);
-  if (file!==null)
-    formData.append("file", file);
+    if (artistname !== "") formData.append("name", artistname);
+    if (file !== null) formData.append("file", file);
     try {
       const response = await axios.put(
         `http://localhost:5100/admin/updateartist/${id}`,
@@ -54,28 +52,40 @@ function UpdateArtistcard({ name, image, id }) {
     }
   };
 
+  const [toggleInputs, settoggleInputs] = useState(false);
+
   return (
     <div className="UpdateCardContainer">
       <div className="profileofartist">
         <img src={image} alt="" />
         <h3>{name}</h3>
-        <div className="inputsafterupdate">
-          <input
-            className="updateArtistName"
-            type="text"
-            placeholder="Enter Artist Name"
-            onChange={handleName}
-            value={artistname}
-          />
-          <input
-            className="updateArtistImg"
-            type="file"
-            onChange={handleFileChange}
-          />
-        </div>
+
+        {toggleInputs && (
+          <div className="inputsafterupdate">
+            <input
+              className="updateArtistName"
+              type="text"
+              placeholder="Enter Artist Name"
+              onChange={handleName}
+              value={artistname}
+            />
+            <input
+              className="updateArtistImg"
+              type="file"
+              onChange={handleFileChange}
+            />
+            <button onClick={handleUpdateArtist}>Update Artist</button>
+          </div>
+        )}
       </div>
       <div className="updatebtns">
-        <button onClick={handleUpdateArtist}>Update</button>
+        <button
+          onClick={() => {
+            settoggleInputs((prev) => !prev);
+          }}
+        >
+          Update
+        </button>
         <button onClick={handleDeleteArtist}>Delete</button>
       </div>
     </div>
