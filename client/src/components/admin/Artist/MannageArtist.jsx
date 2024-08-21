@@ -48,7 +48,17 @@ function AddArtist() {
       <button className="addArtistBtn" onClick={handleAddArtist}>Add Artist</button>
     </div>
     <div className="UpdateArtistContainer">
+     
+      <h2 className="headingUpdateArtist">Update Artist</h2>
       <div className="updateArtistCard">
+        <UpdateArtistcard />
+        <UpdateArtistcard />
+        <UpdateArtistcard />
+        <UpdateArtistcard />
+        <UpdateArtistcard />
+        <UpdateArtistcard />
+        <UpdateArtistcard />
+        <UpdateArtistcard />
         <UpdateArtistcard />
         <UpdateArtistcard />
         <UpdateArtistcard />
