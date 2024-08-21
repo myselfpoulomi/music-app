@@ -1,12 +1,12 @@
 import React from 'react'
 import './UpdateArtistCard.css'
 
-function UpdateArtistcard(item,index) {
+function UpdateArtistcard({name,image}) {
   return (
     <div className='UpdateCardContainer'>
         <div className="imgofartist">
-            <img src={item.image} alt="" />
-            <h3>{item.name}</h3>
+            <img src={image} alt="" />
+            <h3>{name}</h3>
         </div>
         <div className="updatebtns">
             <button>Update</button>

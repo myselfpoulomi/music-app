@@ -1,10 +1,10 @@
 import React from "react";
 import "./Artistcard.css";
 
-function Artistcard(item,index) {
+function Artistcard({name,image}) {
   return <div className="artistcards">
-    <img src={item.image} alt="" />
-    <h5>{item.name}</h5>
+    <img src={image} alt="" />
+    <h5>{name}</h5>
     
   </div>
 }
