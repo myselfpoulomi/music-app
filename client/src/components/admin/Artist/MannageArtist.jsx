@@ -66,8 +66,9 @@ function AddArtist() {
       <h2 className="headingUpdateArtist">Update Artist</h2>
       <div className="updateArtistCard">
       {artistList.map((item, index) => {
+    
           
-          return < UpdateArtistcard key={index} name={item.name} image={item.image} />;
+          return < UpdateArtistcard key={index} name={item.name} image={item.image} id={item._id}  />;
         })}
       </div>
     </div>
