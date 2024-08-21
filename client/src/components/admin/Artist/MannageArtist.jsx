@@ -4,6 +4,7 @@ import { IoLogoHackernews } from "react-icons/io5";
 // import { toast } from "react-toastify";
 import axios from 'axios'
 import './MannageArtist.css'
+import UpdateArtistcard from "./UpdateArtistcard";
 
 function AddArtist() {
   const [name, setname] = useState("");
@@ -39,12 +40,19 @@ function AddArtist() {
     }
   };
   return (
-    <div>
+    <div className="MannageArtistContainer">
       <div className="AddArtistContainer">
       <h2 className="addArtistHeadline">Add Artist</h2>
       <input className="inputname" type="text" onChange={handleName}  value={name}/>
       <input className="inputfile" type="file" onChange={handleFileChange}/>
       <button className="addArtistBtn" onClick={handleAddArtist}>Add Artist</button>
+    </div>
+    <div className="UpdateArtistContainer">
+      <div className="updateArtistCard">
+        <UpdateArtistcard />
+        <UpdateArtistcard />
+        <UpdateArtistcard />
+      </div>
     </div>
     </div>
   );
