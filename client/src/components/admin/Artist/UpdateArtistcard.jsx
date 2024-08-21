@@ -31,24 +31,26 @@ function UpdateArtistcard({ name, image, id }) {
   };
 
   const handleUpdateArtist = async () => {
-    if (artistname == "" || file == null) {
+    if (artistname == "" && file == null) {
       alert("put name and choose file");
       return;
     }
     const formData = new FormData();
+    if (artistname!=="")
     formData.append("name", artistname);
+  if (file!==null)
     formData.append("file", file);
     try {
-      const response = await axios.post(
-        "http://localhost:5100/admin/addartist",
+      const response = await axios.put(
+        `http://localhost:5100/admin/updateartist/${id}`,
         formData
       );
       if (response.status == 200) {
-        alert("Artist Added");
+        alert("Artist Updated");
       }
       console.log(response);
     } catch (error) {
-      console.log("error while adding artist", error);
+      console.log("error while updating artist", error);
     }
   };
 
