@@ -52,7 +52,50 @@ function AddArtist() {
       }
     }
     getallArtist();
-  }, []);
+  }, []); 
+
+
+
+  const [updatename, setupdatename] = useState("");
+  const [updatefile, setupdatefile] = useState(null);
+  const [setidtoupdate, setsetidtoupdate] = useState(null)
+  const handleNameupdate = (e) => {
+    const artistname = e.target.value;
+    setupdatename(artistname);
+  };
+  const handleFileChangeupdate = (e) => {
+    const file = e.target.files[0];
+    if (file.type.startsWith("image/")) setupdatefile(file);
+    else alert("inert image only");
+  };
+
+  const handleUpdateArtist = async () => {
+    const id = setidtoupdate
+    if (updatename == "" && updatefile == null) {
+      alert("put name and choose file");
+      return;
+    }
+    const formData = new FormData();
+    if (updatename !== "") formData.append("name", updatename);
+    if (updatefile !== null) formData.append("file", updatefile);
+    try {
+      const response = await axios.put(
+        `http://localhost:5100/admin/updateartist/${id}`,
+        formData
+      );
+      if (response.status == 200) {
+        alert("Artist Updated");
+      }
+      console.log(response);
+    } catch (error) {
+      console.log("error while updating artist", error);
+    }
+  };
+
+  
+
+  const [toggleInputs, settoggleInputs] = useState(false);
+
   return (
     <div className="MannageArtistContainer">
       <div className="AddArtistContainer">
@@ -60,6 +103,24 @@ function AddArtist() {
       <input className="inputname" type="text" onChange={handleName}  value={name}/>
       <input className="inputfile" type="file" onChange={handleFileChange}/>
       <button className="addArtistBtn" onClick={handleAddArtist}>Add Artist</button>
+      {toggleInputs && (
+          <div className="inputsafterupdate">
+            <p>Update artist</p>
+            <input
+              className="updateArtistName"
+              type="text"
+              placeholder="Enter Artist Name"
+              onChange={handleNameupdate}
+              value={updatename}
+            />
+            <input
+              className="updateArtistImg"
+              type="file"
+              onChange={handleFileChangeupdate}
+            />
+            <button onClick={handleUpdateArtist}>Update Artist</button>
+          </div>
+        )}
     </div>
     <div className="UpdateArtistContainer">
      
@@ -68,7 +129,7 @@ function AddArtist() {
       {artistList.map((item, index) => {
     
           
-          return < UpdateArtistcard key={index} name={item.name} image={item.image} id={item._id}  />;
+          return < UpdateArtistcard key={index} name={item.name} image={item.image} id={item._id}  settoggleInputs={settoggleInputs} setsetidtoupdate={setsetidtoupdate}/>;
         })}
       </div>
     </div>

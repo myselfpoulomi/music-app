@@ -3,7 +3,13 @@ import "./UpdateArtistCard.css";
 import axios from "axios";
 import { useState } from "react";
 
-function UpdateArtistcard({ name, image, id }) {
+function UpdateArtistcard({
+  name,
+  image,
+  id,
+  settoggleInputs,
+  setsetidtoupdate,
+}) {
   const handleDeleteArtist = async () => {
     try {
       const Response = await axios.delete(
@@ -18,41 +24,41 @@ function UpdateArtistcard({ name, image, id }) {
     }
   };
 
-  const [artistname, setname] = useState("");
-  const [file, setfile] = useState(null);
-  const handleName = (e) => {
-    const artistname = e.target.value;
-    setname(artistname);
-  };
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file.type.startsWith("image/")) setfile(file);
-    else alert("inert image only");
-  };
+  // const [artistname, setname] = useState("");
+  // const [file, setfile] = useState(null);
+  // const handleName = (e) => {
+  //   const artistname = e.target.value;
+  //   setname(artistname);
+  // };
+  // const handleFileChange = (e) => {
+  //   const file = e.target.files[0];
+  //   if (file.type.startsWith("image/")) setfile(file);
+  //   else alert("inert image only");
+  // };
 
-  const handleUpdateArtist = async () => {
-    if (artistname == "" && file == null) {
-      alert("put name and choose file");
-      return;
-    }
-    const formData = new FormData();
-    if (artistname !== "") formData.append("name", artistname);
-    if (file !== null) formData.append("file", file);
-    try {
-      const response = await axios.put(
-        `http://localhost:5100/admin/updateartist/${id}`,
-        formData
-      );
-      if (response.status == 200) {
-        alert("Artist Updated");
-      }
-      console.log(response);
-    } catch (error) {
-      console.log("error while updating artist", error);
-    }
-  };
+  // const handleUpdateArtist = async () => {
+  //   if (artistname == "" && file == null) {
+  //     alert("put name and choose file");
+  //     return;
+  //   }
+  //   const formData = new FormData();
+  //   if (artistname !== "") formData.append("name", artistname);
+  //   if (file !== null) formData.append("file", file);
+  //   try {
+  //     const response = await axios.put(
+  //       `http://localhost:5100/admin/updateartist/${id}`,
+  //       formData
+  //     );
+  //     if (response.status == 200) {
+  //       alert("Artist Updated");
+  //     }
+  //     console.log(response);
+  //   } catch (error) {
+  //     console.log("error while updating artist", error);
+  //   }
+  // };
 
-  const [toggleInputs, settoggleInputs] = useState(false);
+  // const [toggleInputs, settoggleInputs] = useState(false);
 
   return (
     <div className="UpdateCardContainer">
@@ -60,7 +66,7 @@ function UpdateArtistcard({ name, image, id }) {
         <img src={image} alt="" />
         <h3>{name}</h3>
 
-        {toggleInputs && (
+        {/* {toggleInputs && (
           <div className="inputsafterupdate">
             <input
               className="updateArtistName"
@@ -76,12 +82,13 @@ function UpdateArtistcard({ name, image, id }) {
             />
             <button onClick={handleUpdateArtist}>Update Artist</button>
           </div>
-        )}
+        )} */}
       </div>
       <div className="updatebtns">
         <button
           onClick={() => {
             settoggleInputs((prev) => !prev);
+            setsetidtoupdate(id);
           }}
         >
           Update
