@@ -1,0 +1,54 @@
+.AddAlbumContainer {
+    height: 100vh;
+    width: 100%;
+}
+
+.leftConatinerAddAlbum {
+    height: 100vh;
+    width: 40%;
+    border: 1px solid rgba(255, 255, 255, 0.214);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap :2rem;
+}
+
+.leftConatinerAddAlbum input {
+    height: 50px;
+    width: 400px;
+    padding: 9px;
+    border-radius: 8px;
+}
+
+.leftConatinerAddAlbum h3 {
+    font-size: xx-large;
+}
+
+.inputfileAddAlbum {
+    height: 200px;
+    width: 40%;
+    font-size: larger;
+    border: 1px solid rgba(101, 86, 86, 0.37);
+}
+
+.SubmitAddAlbum {
+    padding: 9px;
+    width: 40%;
+    border-radius: 9px;
+    background-color:  rgb(120, 182, 182);
+    border: none;
+}
+
+.leftConatinerAddAlbum textarea {
+    padding: 9px;
+    border-radius: 8px;
+}
+
+
+
+
+.rightConatinerAddAlbum {
+    width: 60%;
+    height: 100vh;
+}
