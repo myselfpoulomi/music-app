@@ -36,4 +36,13 @@ async function addSong(req, res) {
     }
 }
 
-export { addSong }
+async function getAllSongs(req, res) {
+    try {
+        const resonse = await SongModel.find({})
+        return res.status(200).json({ msg: "All songs fetched", status: true, songs: resonse })
+    } catch (error) {
+        return res.status(500).json({ msg: "Error while fetching songs!", status: false })
+    }
+}
+
+export { addSong, getAllSongs }
