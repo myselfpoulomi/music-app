@@ -22,7 +22,7 @@ function UpdateArtistcard({
     } catch (error) {
       console.log(error);
     }
-  };
+  }; 
 
   // const [artistname, setname] = useState("");
   // const [file, setfile] = useState(null);
