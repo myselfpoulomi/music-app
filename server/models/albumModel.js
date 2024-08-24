@@ -20,5 +20,5 @@ const albumSchema = mongoose.Schema({
         String
     ]
 })
-const albumModel = mongoose.model("albums", albumSchema)
+const albumModel = mongoose.model("Album", albumSchema)
 export default albumModel

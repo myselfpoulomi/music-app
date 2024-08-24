@@ -16,6 +16,6 @@ const artistSchema = mongoose.Schema({
     ]
 })
 
-const artistModel = mongoose.model("artists", artistSchema)
+const artistModel = mongoose.model("Artist", artistSchema)
 
 export default artistModel

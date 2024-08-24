@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import cors from "cors"
 import artistRouter from './router/artistRouter.js';
 import albumRouter from './router/albumRouter.js';
+import songRouter from './router/songRouter.js';
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.use(cors({
 
 app.use("/", artistRouter)
 app.use("/", albumRouter)
+app.use("/", songRouter)
 
 mongoose.connect(MONGO_URL).then(() => {
     app.listen(PORT, () => {
