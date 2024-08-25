@@ -1,5 +1,5 @@
 .artistcards {
-  height: 100%;
+  height: 250px;
   width: 200px;
   display: flex;
   flex-direction: column;
@@ -15,7 +15,6 @@
 
 .artistcards img {
   height: 150px;
-  
   border-radius: 50%;
   width: 150px;
   margin-bottom: 20px;
@@ -30,15 +29,15 @@
 }
 
 .artistcards img {
-    transition: box-shadow 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.453); 
+  transition: box-shadow 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.453);
 }
 
 .artistcards img:hover {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Slightly stronger shadow on hover */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Slightly stronger shadow on hover */
 }
 
 .artistcards h5 {
-    font-size: large;
-    font-weight: 100;
+  font-size: large;
+  font-weight: 100;
 }

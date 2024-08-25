@@ -10,15 +10,15 @@ const albumSchema = mongoose.Schema({
     image: {
         type: String,
     },
-    // songs: [
-    //     {
-    //         type: mongoose.Schema.Types.ObjectId,
-    //         ref: 'songs'
-    //     }
-    // ]
     songs: [
-        String
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'songs'
+        }
     ]
+    // songs: [
+    //     String
+    // ]
 })
 const albumModel = mongoose.model("Album", albumSchema)
 export default albumModel

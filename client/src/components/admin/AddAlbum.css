@@ -9,9 +9,11 @@
   height: 100vh;
   width: 40%;
   border: 1px solid rgba(255, 255, 255, 0.214);
+  border-top: none;
+  border-bottom: none;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   gap: 2rem;
 }
@@ -21,10 +23,12 @@
   width: 400px;
   padding: 9px;
   border-radius: 8px;
+  color: #000;
 }
 
 .leftConatinerAddAlbum h3 {
   font-size: xx-large;
+  margin-top: 10%;
 }
 
 .inputfileAddAlbum {
@@ -45,6 +49,7 @@
 .leftConatinerAddAlbum textarea {
   padding: 9px;
   border-radius: 8px;
+  color: #000; 
 }
 
 .rightConatinerAddAlbum {
@@ -57,7 +62,7 @@
 }
 
 .rightConatinerAddAlbum h3 {
-    margin-top: 10%;
+    margin-top: 7%;
     font-size: xx-large;
 }
 

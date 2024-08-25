@@ -9,7 +9,7 @@ import Admin from "./pages/Admin";
 
 function App() {
   return (
-    <div className="container">
+    <div className="containermain">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/admin/*" element={<Admin />} />
