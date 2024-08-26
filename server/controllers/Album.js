@@ -76,4 +76,23 @@ async function updateAlbum(req, res) {
   }
 }
 
-export { addAlbum, updateAlbum };
+async function deleteAlbum(req, res) {
+  const { albumid } = req.params;
+  try {
+    const albumres = await albumModel.findById(albumid);
+    if (!albumres) {
+      return res.status(400).json({ msg: "Album not found!", success: false });
+    }
+    const deletedAlbum = await albumModel.findByIdAndDelete(albumid);
+    return res.status(200).json({
+      msg: "Album deleted successfully",
+      success: true,
+      album: deletedAlbum
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ msg: "Error while deleting album", error });
+  }
+}
+
+export { addAlbum, updateAlbum, deleteAlbum };
