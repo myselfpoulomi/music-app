@@ -95,4 +95,40 @@ async function deleteAlbum(req, res) {
   }
 }
 
-export { addAlbum, updateAlbum, deleteAlbum };
+async function getAlbumById(req, res) {
+  const { albumid } = req.params;
+  try {
+    const albumres = await albumModel.findById(albumid);
+    if (!albumres) {
+      return res.status(400).json({ msg: "Album not found!", success: false });
+    }
+    return res.status(200).json({
+      msg: "Album fetched successfully",
+      success: true,
+      album: albumres
+    });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ msg: "Error while getting album by id", error });
+  }
+}
+
+async function getAllAlbums(req, res) {
+  try {
+    const albumList = await albumModel.find({});
+    return res.status(200).json({
+      msg: "All albums feched successfully",
+      success: true,
+      albumList
+    });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ msg: "Error while fetching all albums", error });
+  }
+}
+
+export { addAlbum, updateAlbum, deleteAlbum, getAlbumById, getAllAlbums };
