@@ -1,32 +1,79 @@
-import albumModel from "../models/albumModel.js"
-import { uploadOnCloudinary } from "../utils/cloudinary.js";
+import albumModel from "../models/albumModel.js";
+import {
+  deleteImageFromCloudinary,
+  uploadOnCloudinary
+} from "../utils/cloudinary.js";
 
 async function addAlbum(req, res) {
-    try {
-        if (!req.file) {
-            return res.status(400).json({ msg: "file is required" })
-        }
-        const filePath = req.file.path;
-        const { title, desc, songs } = req.body;
-        if (!title || !desc) {
-            return res.status(400).json({ message: 'Title, description are required.' });
-        }
-        let album = {
-            title, desc
-        }
-        if (songs && songs != "") {
-            album.songs = songs.split(',')
-        }
-        const cloudinary_response = await uploadOnCloudinary(filePath, "albums")
-        if (!cloudinary_response) return res.status(400).json({ msg: "File not uploaded on cloud" })
-        album.image = cloudinary_response.url
-        const newAlbum = new albumModel(album)
-        const albumres = await newAlbum.save()
-        return res.status(200).json({ msg: "Album added successfully", album: albumres })
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({ msg: "Error while adding album", error })
+  try {
+    if (!req.file) {
+      return res.status(400).json({ msg: "file is required" });
     }
+    const filePath = req.file.path;
+    const { title, desc, songs } = req.body;
+    if (!title || !desc) {
+      return res
+        .status(400)
+        .json({ message: "Title, description are required." });
+    }
+    let album = {
+      title,
+      desc
+    };
+    if (songs && songs != "") {
+      album.songs = songs.split(",");
+    }
+    const cloudinary_response = await uploadOnCloudinary(filePath, "albums");
+    if (!cloudinary_response)
+      return res.status(400).json({ msg: "File not uploaded on cloud" });
+    album.image = cloudinary_response.url;
+    const newAlbum = new albumModel(album);
+    const albumres = await newAlbum.save();
+    return res
+      .status(200)
+      .json({ msg: "Album added successfully", album: albumres });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ msg: "Error while adding album", error });
+  }
 }
 
-export { addAlbum }
+async function updateAlbum(req, res) {
+  const { albumid } = req.params;
+  const { title, desc, songs } = req.body;
+  const file = req.file;
+  if (!title && !desc && !songs && !file) {
+    return res.status(400).json({ msg: "Nothing to update!", success: false });
+  }
+  try {
+    const albumres = await albumModel.findById(albumid);
+    if (!albumres)
+      return res.status(400).json({ msg: "Album not found!", success: false });
+    const obj = {};
+    if (title) obj.title = title;
+    if (desc) obj.desc = desc;
+    if (songs && songs != "") {
+      obj.songs = songs.split(",");
+    }
+    if (file) {
+      if (albumres && albumres.image) {
+        await deleteImageFromCloudinary(albumres.image);
+      }
+      const cloudinaryResponse = await uploadOnCloudinary(file.path, "albums");
+      obj.image = cloudinaryResponse.url;
+    }
+    const updatedAlbum = await albumModel.findByIdAndUpdate(albumid, obj, {
+      new: true
+    });
+    if (updatedAlbum) {
+      return res
+        .status(200)
+        .json({ msg: "Album udpated", success: true, album: updatedAlbum });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ msg: "Error while updating album", error });
+  }
+}
+
+export { addAlbum, updateAlbum };
