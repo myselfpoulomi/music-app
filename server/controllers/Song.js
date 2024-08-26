@@ -1,5 +1,7 @@
 import SongModel from "../models/songModel.js";
 import {
+  deleteImageFromCloudinary,
+  deleteMp3FromCloudinary,
   uploadMp3OnCloudinary,
   uploadOnCloudinary
 } from "../utils/cloudinary.js";
@@ -66,6 +68,8 @@ async function deleteSong(req, res) {
     if (!songres) {
       return res.status(400).json({ msg: "Song not found", status: false });
     }
+    await deleteImageFromCloudinary(songres.image);
+    await deleteMp3FromCloudinary(songres.song);
     const deletedRes = await SongModel.findByIdAndDelete(songid);
     if (deletedRes) {
       return res.status(200).json({
@@ -100,4 +104,59 @@ async function getSongById(req, res) {
   }
 }
 
-export { addSong, getAllSongs, deleteSong, getSongById };
+async function updateSong(req, res) {
+  const { songid } = req.params;
+  const { title, artist, album } = req.body;
+  const song = req.files["song"] ? req.files["song"][0] : null;
+  const image = req.files["image"] ? req.files["image"][0] : null;
+  if (!title && !artist && !album && !song && !image) {
+    return res.status(400).json({ msg: "nothing to update", success: false });
+  }
+  try {
+    const songres = await SongModel.findById(songid);
+    if (!songres) {
+      return res.status(400).json({ msg: "Song not found", status: false });
+    }
+    const obj = {};
+    if (title) obj.title = title;
+    if (artist) obj.artist = artist;
+    if (album) obj.album = album;
+    if (image) {
+      if (songres && songres.image) {
+        await deleteImageFromCloudinary(songres.image);
+      }
+      const cloudinaryResponse = await uploadOnCloudinary(
+        image.path,
+        "songcover"
+      );
+      obj.image = cloudinaryResponse.url;
+    }
+    if (song) {
+      if (songres && songres.song) {
+        await deleteMp3FromCloudinary(songres.song);
+      }
+      const cloudinaryResponse = await uploadMp3OnCloudinary(
+        song.path,
+        "songs"
+      );
+      obj.song = cloudinaryResponse.url;
+    }
+    const updatedSong = await SongModel.findByIdAndUpdate(sonid, obj, {
+      new: true
+    });
+    if (updatedSong) {
+      return res.status(200).json({
+        msg: "Song updated successfully",
+        status: true,
+        songupdatedSong
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ msg: "Error while updating song!", status: false });
+  }
+}
+
+export { addSong, getAllSongs, deleteSong, getSongById, updateSong };
