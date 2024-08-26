@@ -21,6 +21,15 @@ function AddAlbum() {
   const [desc, setdesc] = useState("");
   const [file, setfile] = useState(null);
 
+  const [setSongs, setsetSongs] = useState([]);
+  
+
+    useEffect(() => {
+      console.log(setSongs);
+      
+    }, [setSongs])
+    
+
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file.type.startsWith("image/")) setfile(file);
@@ -37,7 +46,10 @@ function AddAlbum() {
     formData.append('title' , name);
     formData.append('desc' , desc);
     formData.append('file', file);
+    formData.append('songs' , setSongs.join(","));
       const response = await axios.post("http://localhost:5100/admin/addalbum" ,formData )
+      
+
   console.log(response);
   
     } catch (error) {
@@ -45,6 +57,8 @@ function AddAlbum() {
       
     }
   }
+  
+    
 
   return (
     <div className="AddAlbumContainer">
@@ -77,7 +91,7 @@ function AddAlbum() {
         <h3>Song List</h3>
 
         {songlist.map((items, index) => (
-          <SongsList key={index} title={items.title} />
+          <SongsList key={index} title={items.title} setSongs={setSongs} id={items._id} setsetSongs={setsetSongs}  />
         ))}
       </div>
     </div>
