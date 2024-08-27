@@ -11,6 +11,7 @@ async function addSong(req, res) {
     const { title, artist, album } = req.body;
     const song = req.files["song"] ? req.files["song"][0] : null;
     const image = req.files["image"] ? req.files["image"][0] : null;
+
     if (!title || !artist || !image || !song) {
       return res
         .status(404)
@@ -141,14 +142,14 @@ async function updateSong(req, res) {
       );
       obj.song = cloudinaryResponse.url;
     }
-    const updatedSong = await SongModel.findByIdAndUpdate(sonid, obj, {
+    const updatedSong = await SongModel.findByIdAndUpdate(songid, obj, {
       new: true
     });
     if (updatedSong) {
       return res.status(200).json({
         msg: "Song updated successfully",
         status: true,
-        songupdatedSong
+        song: updatedSong
       });
     }
   } catch (error) {
