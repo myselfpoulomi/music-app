@@ -2,6 +2,7 @@ import React from "react";
 import Nav from "../components/navbar/Nav";
 import ArtistRow from "../components/ArtistRow/ArtistRow";
 import SongRow from "../components/Songs/SongRow";
+import AlbumRow from "../components/Album/AlbumRow";
 
 function Home() {
   return (
@@ -11,6 +12,7 @@ function Home() {
         <Nav /> 
         <ArtistRow/>
         <SongRow/> 
+        <AlbumRow />
       </div>
     </>
   );

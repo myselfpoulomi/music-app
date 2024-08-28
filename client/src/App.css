@@ -25,4 +25,7 @@ body {
 .main-right {
   width: 80%;
   background-color: rgb(58, 55, 55);
+  height: 100vh;
+  overflow-y: auto;
+  /* padding-top: 5rem; */
 }
