@@ -6,7 +6,7 @@ function AlbumRow() {
   useEffect(() => {
     async function getAllAlbumbs() {
       try {
-        const response = await axios.get("http://localhost:5100/admin/getallalbums");
+        const response = await axios.get("http://localhost:5100/getallalbums");
         setalbumlist(response.data.albumList);
         console.log(response.data);
         

@@ -20,26 +20,26 @@ function AddSong() {
     getallArtist();
   }, []);
 
-  async function handleSubmitAlbum  ()  {
-    if (name == ""||file==null||audio==null) {
-      alert("Provide Song Details")
+  async function handleSubmitAlbum() {
+    if (name == "" || file == null || audio == null) {
+      alert("Provide Song Details");
     } else {
       const formData = new FormData();
       formData.append("title", name);
       formData.append("image", file);
       formData.append("song", audio);
-      formData.append("artist",checkArtist);
+      formData.append("artist", checkArtist);
       try {
-        const response = await axios.post ("http://localhost:5100/admin/addsong",formData);
+        const response = await axios.post(
+          "http://localhost:5100/admin/addsong",
+          formData
+        );
         alert("Song Added");
       } catch (error) {
-        console.log("Error while putting song" , error);
-        
+        console.log("Error while putting song", error);
       }
-      
-      
     }
-  };
+  }
 
   const handleChange = (e, item) => {
     if (e.target.checked) {
@@ -60,7 +60,6 @@ function AddSong() {
 
     //    handleChange = (e, item);
     //   };
-
   };
 
   useEffect(() => {

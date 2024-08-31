@@ -62,7 +62,7 @@ function AddAlbum() {
         <div className=" h-[550px] w-[350px] mt-9 flex flex-col text-white ">
           <p className=" my-3">Add Album Title</p>
           <input
-            className=" py-[6px] px-[20px] rounded-md "
+            className=" py-[6px] px-[20px] rounded-md text-black"
             onChange={(e) => {
               setname(e.target.value);
             }}
@@ -100,6 +100,7 @@ function AddAlbum() {
             id={items._id}
             setsetSongs={setsetSongs}
           />
+    
         ))}
       </div>
     </div>
