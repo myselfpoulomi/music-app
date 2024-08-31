@@ -144,7 +144,7 @@ function AddArtist() {
         )} */}
       </div>
       <div className="shadow-2xl h-[800px] w-[750px] flex items-center flex-col  text-white rounded-lg bg-stone-800">
-        <h2 className="headingUpdateArtist">Update Artist</h2>
+        <h2 className="mt-9 text-2xl">Update Artist</h2>
         <div className="updateArtistCard">
           {artistList.map((item, index) => {
             return (
