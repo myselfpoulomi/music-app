@@ -6,6 +6,8 @@ function AddSong() {
   const [name, setname] = useState("");
   const [file, setfile] = useState(null);
   const [audio, setaudio] = useState(null);
+  const [checkArtist, setcheckArtist] = useState("");
+  const [selectedOption, setSelectedOption] = useState(null);
   useEffect(() => {
     async function getallArtist() {
       try {
@@ -18,9 +20,52 @@ function AddSong() {
     getallArtist();
   }, []);
 
-  const handleSubmitAlbum = () => {
-    
+  async function handleSubmitAlbum  ()  {
+    if (name == ""||file==null||audio==null) {
+      alert("Provide Song Details")
+    } else {
+      const formData = new FormData();
+      formData.append("title", name);
+      formData.append("image", file);
+      formData.append("song", audio);
+      formData.append("artist",checkArtist);
+      try {
+        const response = await axios.post ("http://localhost:5100/admin/addsong",formData);
+        alert("Song Added");
+      } catch (error) {
+        console.log("Error while putting song" , error);
+        
+      }
+      
+      
+    }
   };
+
+  const handleChange = (e, item) => {
+    if (e.target.checked) {
+      setSelectedOption(item.name);
+      setcheckArtist(item._id);
+    } else {
+      setSelectedOption(null);
+    }
+
+    // useEffect(() => {
+
+    // console.log(checkArtist);
+
+    // }, [])
+
+    // function CheckboxList({ items }) {
+    //   // State to store the selected item
+
+    //    handleChange = (e, item);
+    //   };
+
+  };
+
+  useEffect(() => {
+    console.log(checkArtist);
+  }, [checkArtist]);
 
   return (
     <div className=" h-[100vh] flex justify-evenly items-center gap-12 ">
@@ -53,7 +98,7 @@ function AddSong() {
             accept=".mp3"
             onChange={(e) => {
               const audio = e.target.files[0];
-              
+
               if (audio.type.startsWith("audio/")) setaudio(audio);
               else alert("inert audio only");
             }}
@@ -77,11 +122,8 @@ function AddSong() {
               className=" w-[350px] mt-9 flex flex-row gap-4 items-center"
             >
               <input
-              onChange={(e) => {
-                
-                
-                
-              }}
+                checked={selectedOption === item.name} // Only checks the checkbox if it matches the selectedOption
+                onChange={(e) => handleChange(e, item)}
                 className="appearance-none w-4 h-4 border border-gray-300 rounded-md checked:bg-white"
                 type="checkbox"
               />
