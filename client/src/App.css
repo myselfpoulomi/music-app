@@ -29,3 +29,9 @@ body {
   overflow-y: auto;
   /* padding-top: 5rem; */
 }
+
+.scrollNone::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

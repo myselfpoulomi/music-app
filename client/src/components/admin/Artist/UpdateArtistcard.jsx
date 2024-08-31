@@ -1,5 +1,5 @@
 import React from "react";
-import "./UpdateArtistCard.css";
+
 import axios from "axios";
 import { useState } from "react";
 
@@ -70,23 +70,7 @@ function UpdateArtistcard({
         />
         <h3 className="mt-[10px] text-[20px] font-bold">{name}</h3>
 
-        {/* {toggleInputs && (
-          <div className="inputsafterupdate">
-            <input
-              className="updateArtistName"
-              type="text"
-              placeholder="Enter Artist Name"
-              onChange={handleName}
-              value={artistname}
-            />
-            <input
-              className="updateArtistImg"
-              type="file"
-              onChange={handleFileChange}
-            />
-            <button onClick={handleUpdateArtist}>Update Artist</button>
-          </div>
-        )} */}
+        
       </div>
       <div className="mt-[10px] flex h-[50px] w-[300px] gap-3">
         <button
@@ -99,7 +83,7 @@ function UpdateArtistcard({
           Update
         </button>
         <button
-          className="bg-red-400 p-2 w-[50%] rounded-lg  text-[20px]"
+          className="bg-red-400 p-2 w-[50%] rounded-lg  text-[20px] hover:bg-red-500 transition-all ease-linear duration-200"
           onClick={handleDeleteArtist}
         >
           Delete

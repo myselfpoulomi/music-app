@@ -2,9 +2,9 @@ import React from 'react'
 
 function SongsList({title , id , setsetSongs}) {
   return (
-    <div className='songListContainer'>
+    <div className=' w-[350px] mt-9 flex flex-row gap-4 items-center'>
         
-        <input type="checkbox" onClick={(e)=>{
+        <input className="appearance-none w-4 h-4 border border-gray-300 rounded-md checked:bg-white" type="checkbox" onClick={(e)=>{
           const status = e.target.checked;
           if (status) {
             setsetSongs ((prev)=>{
@@ -17,7 +17,7 @@ function SongsList({title , id , setsetSongs}) {
           }
           
         }} /> 
-        <p>{title}</p>
+        <p className="text-[20px]">{title}</p>
         
     </div>
   )

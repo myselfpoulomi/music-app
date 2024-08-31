@@ -24,26 +24,21 @@ function AddSong() {
             accept=".mp3"
           />
 
-          <button className=" p-2 mx-4 mt-5 rounded-md text-lg bg-red-400 border-none ">
+          <button className=" p-2 mx-4 mt-5 rounded-md text-lg bg-red-400 border-none hover:bg-red-500 transition-all ease-linear duration-200 ">
             Submit
           </button>
         </div>
       </div>
-      <div className="shadow-2xl h-[600px] w-[400px] flex items-center flex-col  text-white rounded-lg bg-stone-800 ">
-          <h2 className="mt-9 text-2xl">Artist List</h2>
-          <div className=" w-[350px] mt-9 flex flex-row gap-4 ">
-          <input type="checkbox" className="" />
-          <p>Arijit Shingh</p>
-          </div>
-          <div className=" w-[350px] mt-9 flex flex-row gap-4 ">
-          <input type="checkbox" className="" />
-          <p>Arijit Shingh</p>
-          </div>
-          <div className=" w-[350px] mt-9 flex flex-row gap-4 ">
-          <input type="checkbox" className="" />
-          <p>Arijit Shingh</p>
-          </div>
+      <div className="shadow-2xl h-[600px] w-[400px] flex items-center flex-col  text-white rounded-lg bg-stone-800">
+        <h2 className="mt-9 text-2xl">Artist List</h2>
+        <div className=" w-[350px] mt-9 flex flex-row gap-4 items-center">
+          <input
+            className="appearance-none w-4 h-4 border border-gray-300 rounded-md checked:bg-white"
+            type="checkbox"
+          />
+          <p className="text-[20px]">Arijit Shingh</p>
         </div>
+      </div>
     </div>
   );
 }
