@@ -96,18 +96,18 @@ function AddArtist() {
       <h2 className="mt-9 text-2xl">Add Artist</h2> 
       <div className=" h-[550px] w-[350px] mt-9 flex flex-col text-white  ">
           <p className="pl-5 my-3">Add Artist Name</p>
-          <input
-            className="p-2 mx-4 rounded-md "
+          <input onChange={handleName}
+            className="p-2 mx-4 rounded-md text-black "
             type="text"
             placeholder="Enter Artist Name"
           />
           <p className="pl-5 my-3">Add Artist Image</p>
-          <input
+          <input onChange={handleFileChange}
             className=" border border-white p-2 mx-4 rounded-md text-md "
             type="file"
           />
 
-          <button className=" p-2 mx-4 mt-5 rounded-md text-lg bg-red-400 border-none ">
+          <button className=" p-2 mx-4 mt-5 rounded-md text-lg bg-red-400 border-none " onClick={handleAddArtist}>
             Submit 
           </button>
         </div>

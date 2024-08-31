@@ -85,7 +85,7 @@ function UpdateArtistcard({
         )} */}
       </div>
       <div className=" flex h-[50px] w-[300px] gap-3">
-        <button className="bg-emerald-500 p-2 w-[50%] rounded-lg text-[20px]"
+        <button className="bg-emerald-500 p-2 w-[50%] rounded-lg text-[20px] hover:bg-emerald-700 transition-all ease-linear duration-200"
           onClick={() => {
             settoggleInputs((prev) => !prev);
             setsetidtoupdate(id);
