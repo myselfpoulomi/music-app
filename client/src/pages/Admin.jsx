@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../components/admin/Admin.css";
-import { useNavigate , Routes , Route } from "react-router-dom";
-import MannageArtist from '../components/admin/Artist/MannageArtist';
+import { useNavigate, Routes, Route } from "react-router-dom";
+import MannageArtist from "../components/admin/Artist/MannageArtist";
 import AddAlbum from "../components/admin/AddAlbum";
 import UpdateAlbum from "../components/admin/UpdateAlbum";
 import AddSong from "../components/admin/AddSong";
@@ -14,7 +14,7 @@ function Admin() {
     { name: "Add Album", path: "/admin/add-album" },
     { name: "Update Album", path: "/admin/update-album" },
     { name: "Add Song", path: "/admin/add-song" },
-    { name: "Update Song", path: "/admin/update-song" },
+    { name: "Update Song", path: "/admin/update-song" }
   ]);
 
   return (
@@ -26,9 +26,9 @@ function Admin() {
             {navList.map((item, index) => {
               return (
                 <p
-                key={index}
-                  onClick={()=> {
-                    navigate(item.path)
+                  key={index}
+                  onClick={() => {
+                    navigate(item.path);
                   }}
                 >
                   {item.name}
@@ -40,14 +40,13 @@ function Admin() {
         <button className="logoutbtn">Logout</button>
       </div>
       <div className="rightContainer">
-      <Routes>
-        <Route path="/mannage-artist" element={<MannageArtist />} />
-        <Route path="/add-album" element={<AddAlbum />} />
-        <Route path="/update-album" element={<UpdateAlbum />} />
-        <Route path="/add-song" element={<AddSong />} />
-        <Route path="/update-song" element={<UpdateSong />} />
-        
-      </Routes>
+        <Routes>
+          <Route path="/mannage-artist" element={<MannageArtist />} />
+          <Route path="/add-album" element={<AddAlbum />} />
+          <Route path="/update-album" element={<UpdateAlbum />} />
+          <Route path="/add-song" element={<AddSong />} />
+          <Route path="/update-song" element={<UpdateSong />} />
+        </Routes>
       </div>
     </div>
   );

@@ -16,5 +16,5 @@ albumRouter.put(
 );
 albumRouter.delete("/admin/deletealbum/:albumid", deleteAlbum);
 albumRouter.get("/admin/getalbumbyid/:albumid", getAlbumById);
-albumRouter.get("/admin/getallalbums", getAllAlbums);
+albumRouter.get("/getallalbums", getAllAlbums);
 export default albumRouter;
