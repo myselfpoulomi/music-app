@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./AddAlbum.css";
+
 import SongsList from "./SongsList";
 import axios from "axios";
 
@@ -48,6 +48,8 @@ function AddAlbum() {
         "http://localhost:5100/admin/addalbum",
         formData
       );
+
+      alert("Album Added");
 
       console.log(response);
     } catch (error) {

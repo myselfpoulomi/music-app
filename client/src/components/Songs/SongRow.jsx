@@ -29,7 +29,7 @@ function SongRow() {
       <div className="flex gap-[0.1rem] pl-[40px] mt-[20px] h-[78%]">
         {songlist.map((items, index) => {
           return (
-            <div className=" h-[270px] w-[280px] hover:bg-[rgba(31,18,18,0.252)] rounded-[10px] flex flex-col items-center justify-center  transition-all duration-700 ease-in-out hover:shadow-[rgba(0,0,0,0.3)]">
+            <div className=" h-[280px] w-[280px] hover:bg-[rgba(31,18,18,0.252)] rounded-[10px] flex flex-col items-center justify-center  transition-all duration-700 ease-in-out hover:shadow-[rgba(0,0,0,0.3)]">
               <img
                 className="h-[200px] w-[200px] object-cover rounded-[7px] mb-3 transform transition-transform duration-300 ease-in-out hover:scale-105"
                 src={items.image}
