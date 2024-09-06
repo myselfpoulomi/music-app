@@ -11,7 +11,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 function App() {
   return (
-    <div className="containermain">
+    <div className="containermain select-none">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/admin/*" element={<Admin />} />
