@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function AddSong() {
   const [Artist, setArtist] = useState([]);
@@ -22,7 +23,7 @@ function AddSong() {
 
   async function handleSubmitSong() {
     if (name == "" || file == null || audio == null) {
-      alert("Provide Song Details");
+      toast.warning("Provide Song Details");
     } else {
       const formData = new FormData();
       formData.append("title", name);
@@ -34,7 +35,7 @@ function AddSong() {
           "http://localhost:5100/admin/addsong",
           formData
         );
-        alert("Song Added");
+        toast.success("Song Added");
       } catch (error) {
         console.log("Error while putting song", error);
       }
@@ -87,7 +88,7 @@ function AddSong() {
             onChange={(e) => {
               const file = e.target.files[0];
               if (file.type.startsWith("image/")) setfile(file);
-              else alert("inert image only");
+              else toast.warning("inert image only");
             }}
           />
           <p className="pl-5 my-3">Add Song</p>
@@ -99,7 +100,7 @@ function AddSong() {
               const audio = e.target.files[0];
 
               if (audio.type.startsWith("audio/")) setaudio(audio);
-              else alert("inert audio only");
+              else toast.warning("inert audio only");
             }}
           />
 

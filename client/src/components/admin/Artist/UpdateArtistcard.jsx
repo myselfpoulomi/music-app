@@ -2,6 +2,7 @@ import React from "react";
 
 import axios from "axios";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 function UpdateArtistcard({
   name,
@@ -17,7 +18,7 @@ function UpdateArtistcard({
       );
       console.log(Response);
       if (Response.status == 200) {
-        alert("Artist Deleted Sucessfully");
+        toast.success("Artist Deleted Sucessfully");
       }
     } catch (error) {
       console.log(error);

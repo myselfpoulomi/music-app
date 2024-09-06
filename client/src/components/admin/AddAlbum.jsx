@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import SongsList from "./SongsList";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function AddAlbum() {
   const [songlist, setsonglist] = useState([]);
@@ -30,12 +31,12 @@ function AddAlbum() {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file.type.startsWith("image/")) setfile(file);
-    else alert("inert image only");
+    else toast.warning("inert image only");
   };
 
   async function settingAlbum() {
     if (name == "" || desc == "" || file == null) {
-      alert("please provide album details");
+      toast.warning("please provide album details");
       return;
     }
     try {
@@ -49,7 +50,7 @@ function AddAlbum() {
         formData
       );
 
-      alert("Album Added");
+      toast.success("Album Added Successfully");
 
       console.log(response);
     } catch (error) {

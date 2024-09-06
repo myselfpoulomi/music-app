@@ -5,7 +5,9 @@ import Home from "./pages/Home";
 import Admin from "./pages/Admin";
 // import Cart from "./pages/Cart";
 // import Login from "./pages/Login";
-// import ToastiContainer from "./components/toastify/ToastifyContainer.jsx"
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
   return (
@@ -17,7 +19,8 @@ function App() {
         <Route  path="/Login" element={<Login />}/> */}
       </Routes>
 
-      {/* <ToastiContainer /> */}
+      <ToastContainer position="top-left" />
+      
     </div>
   );
 }

@@ -7,6 +7,7 @@ import UpdateAlbum from "../components/admin/UpdateAlbum";
 import AddSong from "../components/admin/AddSong";
 import UpdateSong from "../components/admin/UpdateSong";
 
+
 function Admin() {
   const navigate = useNavigate();
   const [navList, setNavList] = useState([
@@ -47,6 +48,7 @@ function Admin() {
           <Route path="/add-song" element={<AddSong />} />
           <Route path="/update-song" element={<UpdateSong />} />
         </Routes>
+        
       </div>
     </div>
   );

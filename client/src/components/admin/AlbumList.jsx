@@ -2,6 +2,7 @@ import React from "react";
 
 import axios from "axios";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 function AlbumList({
   title,
@@ -19,7 +20,7 @@ function AlbumList({
       );
       console.log(Response);
       if (Response.status == 200) {
-        alert("Album Deleted Sucessfully");
+        toast.success("Album Deleted Sucessfully");
       }
     } catch (error) {
       console.log(error);

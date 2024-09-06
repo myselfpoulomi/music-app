@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { IoLogoHackernews } from "react-icons/io5";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 import axios from "axios";
-
 import UpdateArtistcard from "./UpdateArtistcard";
 
 function AddArtist() {
@@ -15,12 +14,12 @@ function AddArtist() {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file.type.startsWith("image/")) setfile(file);
-    else alert("inert image only");
+    else toast.warning("inert image only");
   };
 
   const handleAddArtist = async () => {
     if (name == "" || file == null) {
-      alert("put name and choose file");
+      toast.warning("put name and choose file");
       return;
     }
     const formData = new FormData();
@@ -34,7 +33,7 @@ function AddArtist() {
       console.log(response);
 
       if (response.status == 200) {
-        alert("Artist Added");
+        toast.success("Artist Added");
       }
       console.log(response);
     } catch (error) {
@@ -64,13 +63,13 @@ function AddArtist() {
   const handleFileChangeupdate = (e) => {
     const file = e.target.files[0];
     if (file.type.startsWith("image/")) setupdatefile(file);
-    else alert("inert image only");
+    else toast.warning("inert image only");
   };
 
   const handleUpdateArtist = async () => {
     const id = setidtoupdate;
     if (updatename == "" && updatefile == null) {
-      alert("put name and choose file");
+      toast.warning("put name and choose file");
       return;
     }
     const formData = new FormData();
@@ -82,7 +81,7 @@ function AddArtist() {
         formData
       );
       if (response.status == 200) {
-        alert("Artist Updated");
+        toast.success("Artist Updated");
       }
       console.log(response);
     } catch (error) {

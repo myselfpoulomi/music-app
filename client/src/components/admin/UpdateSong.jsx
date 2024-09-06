@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import SongsList from "./SongsList";
 import axios from "axios";
 import UpdateSongCard from "./UpdateSongCard";
+import { toast } from "react-toastify";
 
 function UpdateSong() {
   const [songlist, setsonglist] = useState([]);
@@ -64,7 +65,7 @@ function UpdateSong() {
 
   async function handleupdatesong() {
     if (updatename == "" && updatefile == "") {
-      alert("Insert Data of Song");
+      toast.warning("Insert Data of Song");
       return;
     }
     try {
@@ -79,7 +80,7 @@ function UpdateSong() {
       );
 
       if (response.status == 200) {
-        alert("Song Updated");
+        toast.success("Song Updated");
       }
     } catch (error) {
       console.log("Error while sending song", error);

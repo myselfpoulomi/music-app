@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import AlbumList from "./AlbumList";
 import SongsList from "./SongsList";
+import { toast } from "react-toastify";
 
 function UpdateAlbum() {
   const [albumList, setalbumList] = useState([]);
@@ -20,7 +21,7 @@ function UpdateAlbum() {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file.type.startsWith("image/")) setupdatefile(file);
-    else alert("inert image only");
+    else toast.warning("inert image only");
   };
 
   useEffect(() => {
@@ -59,7 +60,7 @@ function UpdateAlbum() {
 
   async function handleUpdateAlbum() {
     if (updatetitle == "" && updatefile == "") {
-      alert("Insert Data of Album");
+      toast.warning("Insert Data of Album");
       return;
     }
     try {
@@ -75,7 +76,7 @@ function UpdateAlbum() {
         formData
       );
       if (Response.status == 200) {
-        alert("Album Updated");
+        toast.success("Album Updated");
       }
     } catch (error) {
       console.log("Error while sending album ", error);
