@@ -54,7 +54,7 @@ function UpdateArtistcard({
           Delete
         </button>
       </div>
-    </div>
+    </div> 
   );
 }
 

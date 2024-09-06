@@ -1,6 +1,6 @@
 import React from 'react'
 
-function SongsList({title , id , setsetSongs}) {
+function SongsList({title , id , setsetSongs , curSong}) {
   return (
     <div className=' w-[350px] mt-9 flex flex-row gap-4 items-center'>
         

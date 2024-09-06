@@ -34,6 +34,7 @@ function UpdateAlbum() {
     }
     getallAlbum();
   }, []);
+  
   useEffect(() => {
     console.log(curAlbum);
   }, [curAlbum]);
@@ -87,8 +88,8 @@ function UpdateAlbum() {
         <h2 className="mt-9 text-2xl">Update Album</h2>
 
         <div className="h-[550px] w-[350px] mt-9 flex flex-col text-white">
-          <p className="pl-5 my-3">Update Album</p>
-          <input
+          <p className="pl-5 my-3">Update Album Name</p>
+          <input 
             className="p-2 mx-4 rounded-md text-black"
             type="text"
             placeholder="Enter Album Name"

@@ -20,7 +20,7 @@ function AddSong() {
     getallArtist();
   }, []);
 
-  async function handleSubmitAlbum() {
+  async function handleSubmitSong() {
     if (name == "" || file == null || audio == null) {
       alert("Provide Song Details");
     } else {
@@ -106,7 +106,7 @@ function AddSong() {
           <button
             className=" p-2 mx-4 mt-5 rounded-md text-lg bg-red-400 border-none hover:bg-red-500 transition-all ease-linear duration-200
            "
-            onClick={handleSubmitAlbum}
+            onClick={handleSubmitSong}
           >
             Submit
           </button>
