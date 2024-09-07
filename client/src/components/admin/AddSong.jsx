@@ -113,7 +113,7 @@ function AddSong() {
           </button>
         </div>
       </div>
-      <div className="shadow-2xl h-[600px] w-[400px] flex items-center flex-col  text-white rounded-lg bg-stone-800">
+      <div className="shadow-2xl h-[600px] w-[400px] flex items-center flex-col  text-white rounded-lg bg-stone-800 overflow-y-auto scrollNone">
         <h2 className="mt-9 text-2xl">Artist List</h2>
         {Artist.map((item, index) => {
           return (

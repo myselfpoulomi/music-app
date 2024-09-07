@@ -121,7 +121,7 @@ function UpdateAlbum() {
         </div>
       </div>
       {toggle ? (
-        <div className="shadow-2xl h-[600px] w-[400px] flex items-center flex-col  text-white rounded-lg bg-stone-800">
+        <div className="shadow-2xl h-[600px] w-[400px] flex items-center flex-col  text-white rounded-lg bg-stone-800 overflow-y-auto scrollNone">
           <h3 className="mt-9 text-2xl">Song List</h3>
 
           {songlist.map((items, index) => (

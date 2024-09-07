@@ -24,7 +24,7 @@ function ArtistRow() {
     if (artistContainerRef.current) {
       artistContainerRef.current.scrollTo({
         left: artistContainerRef.current.scrollLeft + 300,
-        behavior: "smooth"
+        behavior: "smooth",
       });
     }
   }
@@ -32,7 +32,7 @@ function ArtistRow() {
     if (artistContainerRef.current) {
       artistContainerRef.current.scrollTo({
         left: artistContainerRef.current.scrollLeft - 300,
-        behavior: "smooth"
+        behavior: "smooth",
       });
     }
   }
