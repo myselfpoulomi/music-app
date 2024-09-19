@@ -7,7 +7,6 @@
   align-items: center;
   padding: 20px;
   background-color: rgba(10, 10, 10, 0.268);
-
 }
 
 .nav-l {
@@ -45,7 +44,6 @@
 .search span {
   font-size: larger;
   position: relative;
-  
   color: rgb(8, 144, 144);
 }
 
@@ -63,6 +61,7 @@
 .profile {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .profile button {
@@ -85,9 +84,9 @@
 .navuser {
   padding: 10px;
   height: 100px;
-  width: 100px;
+  /* width: 100px; */
   margin-left: 30px;
-  margin-right: 20px;
+  /*margin-right: 20px; */
   font-size: 40px;
   display: flex;
   align-items: center;
