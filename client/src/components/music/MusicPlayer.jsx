@@ -32,7 +32,7 @@ const MusicPlayer = ({ audioSrc }) => {
   };
 
   return (
-    <div className="mx-auto bg-gray-800 text-white p-4 rounded-lg shadow-lg fixed bottom-0 w-[80%]">
+    <div className="mx-auto bg-gray-800 text-white p-4 rounded-lg shadow-lg fixed bottom-0 w-[100%]">
       <audio
         ref={audioRef}
         src={audioSrc}

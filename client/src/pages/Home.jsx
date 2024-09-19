@@ -16,8 +16,9 @@ function Home() {
         <ArtistRow/>
         <SongRow setcurSong={setcurSong}/> 
         <AlbumRow />
-        <MusicPlayer audioSrc={curSong}/>
+        
       </div>
+      <MusicPlayer audioSrc={curSong}/>
     </>
   );
 }
