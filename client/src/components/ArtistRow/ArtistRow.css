@@ -1,7 +1,7 @@
 .ArtistRow {
     /* height : 250px; */
     width: 100%;
-   padding: 20px;
+   padding: 10px;
 }
 
 .headingForArtist {
@@ -14,7 +14,8 @@
 
 .headingForArtist h2 {
     padding-left: 10px;
-    font-size: xx-large;
+    font-size:30px;
+    font-weight: 500;
 }
 
 .arrows {
@@ -27,7 +28,7 @@
 
 .ArtistProfile {
    padding-left: 20px;
-    margin-top: 20px;
+    margin-top: 5px;
     height: 78%;
 }
 
