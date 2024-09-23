@@ -18,7 +18,7 @@ function Home() {
         <AlbumRow />
         
       </div>
-      <MusicPlayer audioSrc={curSong}/>
+      {/* <MusicPlayer audioSrc={curSong}/> */}
     </>
   );
 }
