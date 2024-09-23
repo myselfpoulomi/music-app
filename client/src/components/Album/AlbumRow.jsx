@@ -8,7 +8,6 @@ import Songlist from "../../pages/Songlist";
 function AlbumRow() {
   const [albumlist, setalbumlist] = useState([]);
   const navigate = useNavigate();
-  const [navList, setNavList] = useState([{ name: "", path: "/songs" }]);
   const albumContainerRef = useRef(null);
   useEffect(() => {
     async function getAllAlbumbs() {
@@ -40,10 +39,8 @@ function AlbumRow() {
     }
   }
 
-  function handleClickAlbum(e) {
-    return (
-      console.log(e)
-    )
+  function handleClickAlbum() {
+    navigate('/songs')
   }
 
   return (
