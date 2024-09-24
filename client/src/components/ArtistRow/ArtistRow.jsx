@@ -5,7 +5,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
 import axios from "axios";
 
-function ArtistRow() {
+function ArtistRow({settoggle}) {
   const [artistList, setartistList] = useState([]);
   const artistContainerRef = useRef(null);
   useEffect(() => {
