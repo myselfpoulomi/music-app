@@ -1,6 +1,7 @@
 import React from "react";
 import { GoHeart } from "react-icons/go";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import SongCard from "../components/SongCard";
 
 function ArtistPreview() {
   return (
@@ -25,27 +26,14 @@ function ArtistPreview() {
           </div>
         </div>
       </div>
-      <div className="h-[70%] ml-[40px]">
-        <h1 className="text-white text-[25px] mb-[10px]">Popular Hits :</h1>
-        <div className="ml-[20px] flex justify-between">
-          <div className="flex w-[250px] items-center justify-around">
-            <p className="text-white text-[15px]">1</p>
-            <img
-              className="h-[50px] w-[50px] rounded-lg"
-              src="https://i.scdn.co/image/ab67616d00001e02e211a32490d19aa970956a7d"
-              alt=""
-            />
-            <p className="text-white text-[15px]">Agar Tum sath Ho</p>
-          </div>
-          <div className="flex items-center text-white">
-            <p>Arijit Singh</p>
-          </div>
-          <div className="text-white flex items-center justify-around  w-[250px] mr-[30px]">
-          <GoHeart />
-          <p>2:03</p>
-          <BsThreeDotsVertical/>
-          </div>
-        </div>
+      <div className="overflow-y-auto">
+      <h1 className="text-white text-[25px] my-[10px] ml-[30px]">Popular Hits :</h1>
+        {
+          Array.from({length:10}).fill("").map((item,index)=>{
+            return  <SongCard/>
+          })
+        }
+        
       </div>
     </div>
   );
