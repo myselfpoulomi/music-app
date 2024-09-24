@@ -3,9 +3,9 @@ import axios from "axios";
 import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import Songlist from "../../pages/Songlist";
 
-function AlbumRow({ settoggle }) {
+
+function AlbumRow() {
   const [albumlist, setalbumlist] = useState([]);
   const navigate = useNavigate();
   const albumContainerRef = useRef(null);
@@ -26,7 +26,7 @@ function AlbumRow({ settoggle }) {
     if (albumContainerRef.current) {
       albumContainerRef.current.scrollTo({
         left: albumContainerRef.current.scrollLeft + 300,
-        behavior: "smooth"
+        behavior: "smooth",
       });
     }
   }
@@ -34,13 +34,12 @@ function AlbumRow({ settoggle }) {
     if (albumContainerRef.current) {
       albumContainerRef.current.scrollTo({
         left: albumContainerRef.current.scrollLeft - 300,
-        behavior: "smooth"
+        behavior: "smooth",
       });
     }
   }
-
   function handleClickAlbum() {
-    settoggle(true);
+    navigate("/album/*");
   }
 
   return (
@@ -64,23 +63,6 @@ function AlbumRow({ settoggle }) {
                 className="h-[240px] min-w-[210px] hover:bg-[rgba(31,18,18,0.252)] rounded-[10px] flex flex-col items-center justify-center  transition-all duration-700 ease-in-out hover:shadow-[rgba(0,0,0,0.3)]"
                 onClick={handleClickAlbum}
               >
-                {/* {navList.map((item, index) => {
-                  return (
-                    <p
-                      key={index}
-                      onClick={() => {
-                        navigate(item.path);
-                        console.log("Album Clicked");
-                
-                      }}
-                    >
-                      {item.name}
-                    </p
-                  );
-                })}  */}
-                <Routes>
-                  <Route path="/songs" element={<Songlist />} />
-                </Routes>
                 <img
                   className="h-[170px] w-[170px] object-cover rounded-[7px] mb-3 transform transition-transform duration-300 ease-in-out hover:scale-105 "
                   src={items.image}

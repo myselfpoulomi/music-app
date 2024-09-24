@@ -11,7 +11,7 @@ import AlbumPreview from "./AlbumPreview";
 
 function Home() {
   const [curSong, setcurSong] = useState("");
-  const [toggle, settoggle] = useState(false);
+  
   return (
     <>
       <div className="main-left"></div>
