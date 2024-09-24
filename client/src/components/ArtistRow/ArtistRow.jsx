@@ -5,7 +5,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
 import axios from "axios";
 
-function ArtistRow({settoggle}) {
+function ArtistRow() {
   const [artistList, setartistList] = useState([]);
   const artistContainerRef = useRef(null);
   useEffect(() => {
@@ -24,7 +24,7 @@ function ArtistRow({settoggle}) {
     if (artistContainerRef.current) {
       artistContainerRef.current.scrollTo({
         left: artistContainerRef.current.scrollLeft + 300,
-        behavior: "smooth",
+        behavior: "smooth"
       });
     }
   }
@@ -32,7 +32,7 @@ function ArtistRow({settoggle}) {
     if (artistContainerRef.current) {
       artistContainerRef.current.scrollTo({
         left: artistContainerRef.current.scrollLeft - 300,
-        behavior: "smooth",
+        behavior: "smooth"
       });
     }
   }
@@ -51,7 +51,7 @@ function ArtistRow({settoggle}) {
         className="ArtistProfile overflow-x-auto scrollNone transition-all ease-linear duration-200"
       >
         {artistList.map((item, index) => {
-          return <Artistcard key={index} name={item.name} image={item.image} />;
+          return <Artistcard key={index} item={item} />;
         })}
       </div>
     </div>

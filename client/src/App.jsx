@@ -6,10 +6,9 @@ import Admin from "./pages/Admin";
 import Songlist from "./pages/Songlist";
 // import Cart from "./pages/Cart";
 // import Login from "./pages/Login";
-import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Login from "./pages/Login";
-
 
 function App() {
   return (
@@ -17,14 +16,9 @@ function App() {
       <Routes>
         <Route path="/*" element={<Home />} />
         <Route path="/admin/*" element={<Admin />} />
-        <Route path="/songs" element={<Songlist/>}/>
-        <Route path="/login" element={<Login/>}/>
-        {/* <Route path="/Cart" element={<Cart />} />
-        <Route  path="/Login" element={<Login />}/> */}
+        <Route path="/login" element={<Login />} />
       </Routes>
-
       <ToastContainer position="top-left" />
-      
     </div>
   );
 }

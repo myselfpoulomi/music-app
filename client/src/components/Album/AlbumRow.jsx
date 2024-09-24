@@ -5,7 +5,7 @@ import { FaArrowRight } from "react-icons/fa";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Songlist from "../../pages/Songlist";
 
-function AlbumRow({settoggle}) {
+function AlbumRow({ settoggle }) {
   const [albumlist, setalbumlist] = useState([]);
   const navigate = useNavigate();
   const albumContainerRef = useRef(null);
@@ -26,7 +26,7 @@ function AlbumRow({settoggle}) {
     if (albumContainerRef.current) {
       albumContainerRef.current.scrollTo({
         left: albumContainerRef.current.scrollLeft + 300,
-        behavior: "smooth",
+        behavior: "smooth"
       });
     }
   }
@@ -34,13 +34,12 @@ function AlbumRow({settoggle}) {
     if (albumContainerRef.current) {
       albumContainerRef.current.scrollTo({
         left: albumContainerRef.current.scrollLeft - 300,
-        behavior: "smooth",
+        behavior: "smooth"
       });
     }
   }
 
   function handleClickAlbum() {
-    navigate('/songs');
     settoggle(true);
   }
 
@@ -61,9 +60,9 @@ function AlbumRow({settoggle}) {
           {albumlist.map((items, index) => {
             return (
               <div
+                key={index}
                 className="h-[240px] min-w-[210px] hover:bg-[rgba(31,18,18,0.252)] rounded-[10px] flex flex-col items-center justify-center  transition-all duration-700 ease-in-out hover:shadow-[rgba(0,0,0,0.3)]"
                 onClick={handleClickAlbum}
-                
               >
                 {/* {navList.map((item, index) => {
                   return (

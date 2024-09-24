@@ -3,7 +3,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
 import axios from "axios";
 
-function SongRow({setcurSong}) {
+function SongRow({ setcurSong }) {
   const [songlist, setsonglist] = useState([]);
   const SongContainerRef = useRef(null);
   useEffect(() => {
@@ -22,7 +22,7 @@ function SongRow({setcurSong}) {
     if (SongContainerRef.current) {
       SongContainerRef.current.scrollTo({
         left: SongContainerRef.current.scrollLeft + 300,
-        behavior: "smooth",
+        behavior: "smooth"
       });
     }
   }
@@ -30,15 +30,14 @@ function SongRow({setcurSong}) {
     if (SongContainerRef.current) {
       SongContainerRef.current.scrollTo({
         left: SongContainerRef.current.scrollLeft - 300,
-        behavior: "smooth",
+        behavior: "smooth"
       });
     }
   }
 
-  function handleClickSongs (song) {
+  function handleClickSongs(song) {
     console.log(song);
-    setcurSong(song.song)
-    
+    setcurSong(song.song);
   }
 
   return (
@@ -57,8 +56,13 @@ function SongRow({setcurSong}) {
         <div className="flex gap-[0.1rem] pl-[40px] mt-[20px] h-[78%] ">
           {songlist.map((items, index) => {
             return (
-              <div className=" h-[240px] min-w-[210px] hover:bg-[rgba(31,18,18,0.252)] rounded-[10px] flex flex-col items-center justify-center  transition-all duration-700 ease-in-out hover:shadow-[rgba(0,0,0,0.3)]"
-              onClick={()=>{handleClickSongs(items)}}>
+              <div
+                key={index}
+                className=" h-[240px] min-w-[210px] hover:bg-[rgba(31,18,18,0.252)] rounded-[10px] flex flex-col items-center justify-center  transition-all duration-700 ease-in-out hover:shadow-[rgba(0,0,0,0.3)]"
+                onClick={() => {
+                  handleClickSongs(items);
+                }}
+              >
                 <img
                   className="h-[170px] w-[170px] object-cover rounded-[7px] mb-3 transform transition-transform duration-200 ease-in-out hover:scale-105"
                   src={items.image}
