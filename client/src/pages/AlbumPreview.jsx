@@ -93,11 +93,13 @@ function AlbumPreview() {
       <SyncLoader color="#ffffff" margin={5} size={10} />
     </div>
   ) : (
-    <div className=" h-[85vh] w-[100%]">
+    <div
+      style={{
+        background: `linear-gradient(0deg, rgba(0, 0, 0, 1) 10%, ${darkerColor} 38%, ${lighterColor} 100%, ${dominantColor} 0%)`
+      }}
+      className=" min-h-[100vh] w-[100%]"
+    >
       <div
-        style={{
-          background: `linear-gradient(-100deg, ${dominantColor}, ${darkerColor}, ${lighterColor})`
-        }}
         className={` w-[100%] h-[300px] flex items-center pl-[20px] gap-[2rem]`}
       >
         <img
@@ -129,7 +131,7 @@ function AlbumPreview() {
         <GoHeart className="text-white font-bold text-[40px] border border-white p-[8px] rounded-full" />
         <BsThreeDotsVertical className="text-white font-bold text-[40px] border border-white p-[8px] rounded-full" />
       </div>
-      <div className=" h-[70%]">
+      <div className=" min-h-[60%]">
         <div className=" ">
           <h1 className="text-white text-[25px] my-[10px] ml-[30px]">
             Songs :
