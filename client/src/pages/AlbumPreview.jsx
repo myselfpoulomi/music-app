@@ -13,7 +13,9 @@ const image =
 function AlbumPreview() {
   const [album, setAlbum] = useState("");
   const { id } = useParams();
-  const { dominantColor, darkerColor, lighterColor } = useExtractColor(image);
+  const { dominantColor, darkerColor, lighterColor } = useExtractColor(
+    album.image
+  );
 
   useEffect(() => {
     async function handleGetAlbumSongs(id) {
@@ -39,12 +41,12 @@ function AlbumPreview() {
       >
         <img
           className="shadow-2xl h-[200px] w-[200px] rounded-lg object-cover"
-          src={image}
-          alt="Ashiqui 2"
+          src={album.image}
+          alt=""
         />
         <div className="text-white flex flex-col">
           <p>Album</p>
-          <h1 className="text-[80px] font-bold">Ashiqui 2</h1>
+          <h1 className="text-[80px] font-bold">{album.title}</h1>
           <div className="flex items-center gap-[4px]">
             <p>Mithoon </p>
             <GoDotFill className="text-[10px]" />
@@ -52,9 +54,11 @@ function AlbumPreview() {
             <GoDotFill className="text-[10px]" />
             <p>Jeet Ganguly</p>
             <GoDotFill className="text-[10px] text-zinc-400" />
-            <p className="text-zinc-200 text-[13px]">2013</p>
+            {/* <p className="text-zinc-200 text-[13px]">{}</p> */}
             <GoDotFill className="text-[10px] text-zinc-400" />
-            <p className="text-zinc-200 text-[13px]">12 songs, 54 min 41 sec</p>
+            <p className="text-zinc-200 text-[13px]">
+              {album.songs&&album.songs.length} songs, 54 min 41 sec
+            </p>
           </div>
         </div>
         <button className="p-[7px] text-white rounded-full w-[120px] h-[50px] bg-teal-700">
@@ -70,7 +74,7 @@ function AlbumPreview() {
           </h1>
           {album &&
             album.songs.map((item, index) => {
-              return <SongCard key={index} item={item} number={index+1} />;
+              return <SongCard key={index} item={item} number={index + 1} />;
             })}
         </div>
       </div>

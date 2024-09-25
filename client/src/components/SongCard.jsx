@@ -30,7 +30,7 @@ function SongCard({ item, number }) {
           <p className="text-white text-[15px]">{item.title}</p>
         </div>
         <div className="flex items-center text-white">
-          <p>{item.artist}</p>
+          <p>{item.artist && item.artist.name}</p>
         </div>
         <div className="text-white flex items-center justify-around  w-[250px] mr-[30px]">
           <GoHeart />

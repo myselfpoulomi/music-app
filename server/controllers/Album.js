@@ -1,3 +1,4 @@
+import { populate } from "dotenv";
 import albumModel from "../models/albumModel.js";
 import {
   deleteImageFromCloudinary,
@@ -135,7 +136,10 @@ async function getAlbumSongs(req, res) {
   const { albumid } = req.params;
   try {
     const album = await albumModel.findById(albumid).populate({
-      path: "songs"
+      path: "songs",
+      populate: {
+        path: "artist"
+      }
     });
     if (!album) {
       return res.status(400).json({ msg: "Album not found!", success: false });
