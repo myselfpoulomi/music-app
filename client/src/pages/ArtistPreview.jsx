@@ -31,7 +31,7 @@ function ArtistPreview() {
       <h1 className="text-white text-[25px] my-[10px] ml-[30px]">Popular Hits :</h1>
         {
           Array.from({length:10}).fill("").map((item,index)=>{
-            return  <SongCard/>
+            return  <SongCard key={index} number={index+1}/>
           })
         }
         

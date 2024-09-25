@@ -1,5 +1,5 @@
 import express from "express"
-import { addArtist, deleteAritst, getAllArtist, getArtistById, updateArtist } from "../controllers/Artist.js"
+import { addArtist, deleteAritst,getArtistSongs, getAllArtist, getArtistById, updateArtist } from "../controllers/Artist.js"
 import uploadStorage from "../middleware/multer.js"
 const artistRouter = express.Router()
 
@@ -8,5 +8,6 @@ artistRouter.delete("/admin/deleteartist/:artistid", deleteAritst)
 artistRouter.get("/getallartists", getAllArtist)
 artistRouter.get("/getartistbyid/:artistid", getArtistById)
 artistRouter.put("/admin/updateartist/:artistid", uploadStorage.single("file"), updateArtist)
+artistRouter.get("/artist/:artistid", getArtistSongs);
 
 export default artistRouter
