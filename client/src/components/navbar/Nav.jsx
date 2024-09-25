@@ -20,7 +20,12 @@ function Nav() {
           <li>Radio</li>
         </ul> */}
 
-        <GrHomeRounded className="text-white font-bold text-[30px]  " />
+        <GrHomeRounded
+          className="text-white font-bold text-[30px] cursor-pointer"
+          onClick={() => {
+            navigate("/");
+          }}
+        />
         {/* search */}
         <div className="search">
           <span>

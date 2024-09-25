@@ -29,8 +29,8 @@ function Home() {
                 </>
               }
             />
-            <Route path="/artist/*" element={<ArtistPreview />} />
-            <Route path="/album/*" element={<AlbumPreview />} />
+            <Route path="/artist/:id" element={<ArtistPreview />} />
+            <Route path="/album/:id" element={<AlbumPreview />} />
           </Routes>
         </div>
       </div>

@@ -4,6 +4,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import SongCard from "../components/SongCard";
 
 function ArtistPreview() {
+  
   return (
     <div className="bg-[rgba(31,18,18,0.2)]">
       <div className="bg-[rgba(31,18,18,0.22)] h-[300px]  flex gap-[1rem] items-center justify-center">

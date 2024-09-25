@@ -1,26 +1,45 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { GoHeart } from "react-icons/go";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
-function SongCard() {
+function SongCard({ item, number }) {
+  const audioRef = useRef(null);
+  const [duration, setDuration] = useState(null);
+  const handleLoadedMetadata = () => {
+    if (audioRef.current) {
+      setDuration(audioRef.current.duration);
+    }
+  };
   return (
     <div className="h-[70%] ml-[40px]">
-      <div className="ml-[20px] flex justify-between">
-        <div className="flex w-[250px] items-center justify-around mb-[10px]">
-          <p className="text-white text-[15px]">1</p>
+      <audio
+        className="hidden"
+        ref={audioRef}
+        src={item.song}
+        onLoadedMetadata={handleLoadedMetadata}
+        controls
+      />
+      <div className=" ml-[20px] flex justify-between">
+        <div className=" flex min-w-[250px] items-center mb-[10px]">
+          <p className="text-white text-[15px] w-[20px]  mr-[20px]">{number}</p>
           <img
-            className="h-[50px] w-[50px] rounded-lg"
-            src="https://i.scdn.co/image/ab67616d00001e02e211a32490d19aa970956a7d"
+            className="h-[50px] w-[50px] rounded-[5px] mr-[10px]"
+            src={item.image}
             alt=""
           />
-          <p className="text-white text-[15px]">Agar Tum sath Ho</p>
+          <p className="text-white text-[15px]">{item.title}</p>
         </div>
         <div className="flex items-center text-white">
-          <p>Arijit Singh</p>
+          <p>{item.artist}</p>
         </div>
         <div className="text-white flex items-center justify-around  w-[250px] mr-[30px]">
           <GoHeart />
-          <p>2:03</p>
+          <p>
+            {Math.floor(duration / 60)}:
+            {Math.floor(duration % 60)
+              .toString()
+              .padStart(2, "0")}
+          </p>
           <BsThreeDotsVertical />
         </div>
       </div>

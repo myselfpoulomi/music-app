@@ -131,4 +131,33 @@ async function getAllAlbums(req, res) {
   }
 }
 
-export { addAlbum, updateAlbum, deleteAlbum, getAlbumById, getAllAlbums };
+async function getAlbumSongs(req, res) {
+  const { albumid } = req.params;
+  try {
+    const album = await albumModel.findById(albumid).populate({
+      path: "songs"
+    });
+    if (!album) {
+      return res.status(400).json({ msg: "Album not found!", success: false });
+    }
+    return res.status(200).json({
+      msg: "Album songs fetched successfully",
+      success: true,
+      album
+    });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ msg: "Error while getting album songs", error });
+  }
+}
+
+export {
+  getAlbumSongs,
+  addAlbum,
+  updateAlbum,
+  deleteAlbum,
+  getAlbumById,
+  getAllAlbums
+};

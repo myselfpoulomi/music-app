@@ -1,15 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { GoDotFill } from "react-icons/go";
 import { GoHeart } from "react-icons/go";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import SongCard from "../components/SongCard";
 import { useExtractColor } from "react-extract-colors";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const image =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRor6eFhtElNPyzMy1gqnapjDab_ZYJC3LQag&s";
 
 function AlbumPreview() {
+  const [album, setAlbum] = useState("");
+  const { id } = useParams();
   const { dominantColor, darkerColor, lighterColor } = useExtractColor(image);
+
+  useEffect(() => {
+    async function handleGetAlbumSongs(id) {
+      try {
+        const { data } = await axios.get(`http://localhost:5100/album/${id}`);
+        setAlbum(data.album);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    if (id) {
+      handleGetAlbumSongs(id);
+    }
+  }, [id]);
 
   return (
     <div className=" h-[85vh] w-[100%]">
@@ -50,10 +68,9 @@ function AlbumPreview() {
           <h1 className="text-white text-[25px] my-[10px] ml-[30px]">
             Songs :
           </h1>
-          {Array.from({ length: 10 })
-            .fill("")
-            .map((item, index) => {
-              return <SongCard key={index} />;
+          {album &&
+            album.songs.map((item, index) => {
+              return <SongCard key={index} item={item} number={index+1} />;
             })}
         </div>
       </div>

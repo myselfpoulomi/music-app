@@ -5,7 +5,8 @@ import {
   deleteAlbum,
   getAlbumById,
   getAllAlbums,
-  updateAlbum
+  updateAlbum,
+  getAlbumSongs
 } from "../controllers/Album.js";
 const albumRouter = express.Router();
 albumRouter.post("/admin/addalbum", uploadStorage.single("file"), addAlbum);
@@ -17,5 +18,6 @@ albumRouter.put(
 albumRouter.delete("/admin/deletealbum/:albumid", deleteAlbum);
 albumRouter.get("/admin/getalbumbyid/:albumid", getAlbumById);
 albumRouter.get("/getallalbums", getAllAlbums);
+albumRouter.get("/album/:albumid", getAlbumSongs);
 
 export default albumRouter;
