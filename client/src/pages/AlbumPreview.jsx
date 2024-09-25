@@ -133,9 +133,6 @@ function AlbumPreview() {
       </div>
       <div className=" min-h-[60%]">
         <div className=" ">
-          <h1 className="text-white text-[25px] my-[10px] ml-[30px]">
-            Songs :
-          </h1>
           {album &&
             album.songs.map((item, index) => {
               return <SongCard key={index} item={item} number={index + 1} />;
