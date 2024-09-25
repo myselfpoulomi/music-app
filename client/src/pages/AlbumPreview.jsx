@@ -6,11 +6,12 @@ import SongCard from "../components/SongCard";
 import { useExtractColor } from "react-extract-colors";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-
-const image =
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRor6eFhtElNPyzMy1gqnapjDab_ZYJC3LQag&s";
+import { BeatLoader, FadeLoader, SyncLoader } from "react-spinners";
 
 function AlbumPreview() {
+  const [isLoading, setisLoading] = useState(true);
+  const [albumArtist, setAlbumArtist] = useState([]);
+  const [totalhour, setTotalhour] = useState("");
   const [album, setAlbum] = useState("");
   const { id } = useParams();
   const { dominantColor, darkerColor, lighterColor } = useExtractColor(
@@ -24,6 +25,8 @@ function AlbumPreview() {
         setAlbum(data.album);
       } catch (error) {
         console.log(error);
+      } finally {
+        setisLoading(false);
       }
     }
     if (id) {
@@ -31,7 +34,65 @@ function AlbumPreview() {
     }
   }, [id]);
 
-  return (
+  // get total hours
+  function formatTime(seconds) {
+    const hrs = Math.floor(seconds / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
+    const secs = Math.floor(seconds % 60);
+    if (hrs === 0) {
+      return `${String(mins).padStart(2, "0")}min ${String(secs).padStart(
+        2,
+        "0"
+      )}sec`;
+    }
+    return `${String(hrs).padStart(2, "0")}hr ${String(mins).padStart(
+      2,
+      "0"
+    )}min ${String(secs).padStart(2, "0")}sec`;
+  }
+  useEffect(() => {
+    if (!album) return;
+    const audioElements = [];
+    const songDurationPromises = album.songs.map((item) => {
+      return new Promise((resolve) => {
+        const audio = new Audio(item.song);
+        audioElements.push(audio);
+        audio.addEventListener("loadedmetadata", () => {
+          resolve(audio.duration);
+        });
+      });
+    });
+    Promise.all(songDurationPromises).then((results) => {
+      let sum = 0;
+      results.forEach((result) => {
+        sum += result;
+      });
+      setTotalhour(formatTime(sum));
+    });
+    return () => {
+      audioElements.forEach((audio) => {
+        audio.pause();
+        audio.src = "";
+      });
+    };
+  }, [album]);
+
+  // set artists
+  useEffect(() => {
+    if (!album) return;
+    let artistSet = new Set();
+    album.songs.map((item) => {
+      artistSet.add(item.artist.name);
+    });
+    artistSet = Array.from(artistSet);
+    setAlbumArtist(artistSet.slice(0, 3));
+  }, [album]);
+
+  return isLoading ? (
+    <div className="h-[85vh] w-[100%] flex items-center justify-center">
+      <SyncLoader color="#ffffff" margin={5} size={10} />
+    </div>
+  ) : (
     <div className=" h-[85vh] w-[100%]">
       <div
         style={{
@@ -48,16 +109,17 @@ function AlbumPreview() {
           <p>Album</p>
           <h1 className="text-[80px] font-bold">{album.title}</h1>
           <div className="flex items-center gap-[4px]">
-            <p>Mithoon </p>
-            <GoDotFill className="text-[10px]" />
-            <p>Ankit Tiwari</p>
-            <GoDotFill className="text-[10px]" />
-            <p>Jeet Ganguly</p>
-            <GoDotFill className="text-[10px] text-zinc-400" />
-            {/* <p className="text-zinc-200 text-[13px]">{}</p> */}
-            <GoDotFill className="text-[10px] text-zinc-400" />
+            {albumArtist &&
+              albumArtist.map((item, index) => {
+                return (
+                  <>
+                    <p>{item}</p>
+                    <GoDotFill className="text-[10px]" />
+                  </>
+                );
+              })}
             <p className="text-zinc-200 text-[13px]">
-              {album.songs&&album.songs.length} songs, 54 min 41 sec
+              {album.songs && album.songs.length} songs, {totalhour}
             </p>
           </div>
         </div>
