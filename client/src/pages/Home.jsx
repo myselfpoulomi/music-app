@@ -11,7 +11,7 @@ import AlbumPreview from "./AlbumPreview";
 
 function Home() {
   const [curSong, setcurSong] = useState("");
-  
+
   return (
     <>
       <div className="main-left"></div>
@@ -34,7 +34,7 @@ function Home() {
           </Routes>
         </div>
       </div>
-      {/* <MusicPlayer audioSrc={curSong}/> */}
+      {/* <MusicPlayer audioSrc={curSong} /> */}
     </>
   );
 }

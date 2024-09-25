@@ -11,8 +11,8 @@ function Nav() {
     navigate("/login");
   };
   return (
-    <div>
-      <nav className="navbar">
+    <div className="sticky top-0 bg-[rgb(24,23,23)]">
+      <nav className="navbar ">
         {/* navlists */}
         {/* <ul className="nav-l">
           <li>Discover</li>
