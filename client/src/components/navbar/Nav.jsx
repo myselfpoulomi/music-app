@@ -10,7 +10,16 @@ function Nav() {
   const handleLogin = () => {
     navigate("/login");
   };
+  function handleSearch (e) {
+      const value = e.target.value;
+      try {
+        
+      } catch (error) {
+        
+      }
+  }
   return (
+    
     <div className="sticky top-0 bg-[rgb(24,23,23)]">
       <nav className="navbar ">
         {/* navlists */}
@@ -31,7 +40,7 @@ function Nav() {
           <span>
             <IoSearchSharp />
           </span>
-          <input type="text" placeholder="Search Music" />
+          <input type="text" placeholder="Search Music" onChange={handleSearch} />
         </div>
 
         {/* login n dp */}

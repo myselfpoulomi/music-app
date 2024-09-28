@@ -100,7 +100,7 @@ function AlbumPreview() {
       className=" min-h-[100vh] w-[100%]"
     >
       <div
-        className={` w-[100%] h-[300px] flex items-center pl-[20px] gap-[2rem]`}
+        className={`w-[100%] h-[300px] flex items-center pl-[20px] gap-[2rem]`}
       >
         <img
           className="shadow-2xl h-[200px] w-[200px] rounded-lg object-cover"
