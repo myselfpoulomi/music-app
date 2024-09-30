@@ -1,6 +1,7 @@
 import UserModel from "../models/UserModel.js";
 import OtpModel from "../models/otpModel.js";
 import GenerateOTP from "../utils/GenerateOTP.js";
+import SendMail from "../utils/SendMai.js";
 
 /* ====== User Authentication ====== */
 async function registerSendOtp(req, res) {
@@ -17,6 +18,15 @@ async function registerSendOtp(req, res) {
 
     const otp = GenerateOTP(5);
     const newOtp = new OtpModel({ email, otp });
+
+    const response = await SendMail(
+      email,
+      "OTP for Geet Music",
+      `Your OTP is ${otp}`
+    );
+    if (!response) {
+      throw new Error("Email not sent, Resend OTP");
+    }
 
     await newOtp.save();
     return res
