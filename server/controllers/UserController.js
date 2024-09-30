@@ -282,7 +282,8 @@ async function removeSongFromPlaylist(req, res) {
     if (!existingUser.playlists.includes(playlistid))
       return res.status(400).json({ msg: "Playlist not found on user" });
     if (!playlist) return res.status(400).json({ msg: "Playlist not found" });
-    if (!playlist.songs.includes(songid)) return res.status(400).json({ msg: "Song not present on playlist" });
+    if (!playlist.songs.includes(songid))
+      return res.status(400).json({ msg: "Song not present on playlist" });
     if (!song) return res.status(400).json({ msg: "Song not found" });
 
     playlist.songs.pull(songid);
@@ -297,7 +298,40 @@ async function removeSongFromPlaylist(req, res) {
 async function getAllPlaylists(req, res) {}
 async function getPlaylist(req, res) {}
 async function updatePlaylistName(req, res) {}
-async function deletePlaylist(req, res) {}
+async function deletePlaylist(req, res) {
+  const { playlistid } = req.params;
+  if (!playlistid) {
+    return res.status(400).json({ msg: "Playlist ID is required" });
+  }
+  try {
+    const [existingUser, playlist] = await Promise.all([
+      UserModel.findById(userId),
+      PlaylistModel.findById(playlistid)
+    ]);
+
+    if (!existingUser) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+
+    if (!existingUser.playlists.includes(playlistid)) {
+      return res.status(404).json({ msg: "Playlist not found on user" });
+    }
+
+    if (!playlist) {
+      return res.status(404).json({ msg: "Playlist not found" });
+    }
+
+    await PlaylistModel.findByIdAndDelete(playlistid);
+
+    existingUser.playlists.pull(playlistid);
+    await existingUser.save();
+
+    return res.status(200).json({ msg: "Playlist deleted successfully" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: "Internal server error" });
+  }
+}
 
 export {
   /* User Authentication */
