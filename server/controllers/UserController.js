@@ -77,7 +77,41 @@ async function registerVerify(req, res) {
       .json({ msg: "Internal server error", error: error.message });
   }
 }
-async function loginSendOtp(req, res) {}
+async function loginSendOtp(req, res) {
+  const { email } = req.body;
+  try {
+    if (!email) {
+      return res.status(400).json({ msg: "Email is required!" });
+    }
+
+    const existingUser = await UserModel.findOne({ email });
+    if (!existingUser) {
+      return res.status(404).json({ msg: "User not found!" });
+    }
+
+    const otp = GenerateOTP(5);
+    const newOtp = new OtpModel({ email, otp });
+
+    const response = await SendMail(
+      email,
+      "OTP for Geet Music Login",
+      `Your OTP is ${otp}`
+    );
+    if (!response) {
+      throw new Error("Email not sent, Resend OTP");
+    }
+
+    await newOtp.save();
+    return res
+      .status(200)
+      .json({ msg: "OTP sent to your email", otpid: newOtp._id });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ msg: "Internal server error", error: error.message });
+  }
+}
 async function loginVerifyOtp(req, res) {}
 
 /* ====== User Profile ====== */
