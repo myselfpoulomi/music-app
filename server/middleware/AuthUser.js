@@ -14,6 +14,9 @@ async function AuthToken(req, res, next) {
     req.email = decoded.email;
     req.role = decoded.role;
     req.name = decoded.name;
+    if (req.role !== "user") {
+      return res.status(403).json({ msg: "Unauthorized" });
+    }
     next();
   } catch (error) {
     console.log(error);

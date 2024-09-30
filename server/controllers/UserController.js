@@ -1,5 +1,6 @@
 import UserModel from "../models/UserModel.js";
 import OtpModel from "../models/otpModel.js";
+import PlaylistModel from "../models/PlaylistModel.js";
 import GenerateOTP from "../utils/GenerateOTP.js";
 import SendMail from "../utils/SendMai.js";
 import bcrypt from "bcryptjs";
@@ -207,7 +208,26 @@ async function getUser(req, res) {
 }
 
 /* ====== Playlist Management ====== */
-async function createPlaylist(req, res) {}
+async function createPlaylist(req, res) {
+  const { name } = req.body;
+  try {
+    const existingPlaylist = await PlaylistModel.findOne({ name });
+    if (existingPlaylist) {
+      return res.status(409).json({ msg: "Playlist already exists" });
+    }
+    const newPlaylist = new PlaylistModel({ name, user: req.id });
+    await newPlaylist.save();
+
+    await UserModel.findByIdAndUpdate(req.id, {
+      $push: { playlists: newPlaylist._id }
+    });
+    
+    return res.status(200).json({ msg: "Playlist created successfully" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: "Internal server error" });
+  }
+}
 async function addSongToPlaylist(req, res) {}
 async function removeSongFromPlaylist(req, res) {}
 async function getAllPlaylists(req, res) {}

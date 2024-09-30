@@ -8,12 +8,14 @@ const playlistSchema = mongoose.Schema({
   songs: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Song"
+      ref: "Song",
+      default: []
     }
   ],
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User"
+    ref: "User",
+    require: true
   },
   visibility: {
     type: String,
