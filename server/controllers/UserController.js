@@ -279,9 +279,10 @@ async function removeSongFromPlaylist(req, res) {
     ]);
 
     if (!existingUser) return res.status(400).json({ msg: "User not found" });
-    if (!existingUser.playlist.includes(playlistid))
+    if (!existingUser.playlists.includes(playlistid))
       return res.status(400).json({ msg: "Playlist not found on user" });
     if (!playlist) return res.status(400).json({ msg: "Playlist not found" });
+    if (!playlist.songs.includes(songid)) return res.status(400).json({ msg: "Song not present on playlist" });
     if (!song) return res.status(400).json({ msg: "Song not found" });
 
     playlist.songs.pull(songid);
