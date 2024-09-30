@@ -2,7 +2,7 @@ import UserModel from "../models/UserModel.js";
 import OtpModel from "../models/otpModel.js";
 import GenerateOTP from "../utils/GenerateOTP.js";
 import SendMail from "../utils/SendMai.js";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 /* ====== User Authentication ====== */
@@ -67,7 +67,9 @@ async function registerVerify(req, res) {
       password: hashedPassword
     });
     await newUser.save();
-    await newOtp.remove();
+    await OtpModel.findByIdAndDelete(existingOtp._id);
+
+    return res.status(200).json({ msg: "User created successfully" });
   } catch (error) {
     console.log(error);
     return res
