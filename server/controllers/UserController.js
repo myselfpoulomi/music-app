@@ -2,6 +2,8 @@ import UserModel from "../models/UserModel.js";
 import OtpModel from "../models/otpModel.js";
 import GenerateOTP from "../utils/GenerateOTP.js";
 import SendMail from "../utils/SendMai.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 /* ====== User Authentication ====== */
 async function registerSendOtp(req, res) {
@@ -39,7 +41,38 @@ async function registerSendOtp(req, res) {
       .json({ msg: "Internal server error", error: error.message });
   }
 }
-async function registerVerify(req, res) {}
+async function registerVerify(req, res) {
+  const { otpid, otp, name, email, password } = req.body;
+  if (!otpid || !otp || !name || !email || !password) {
+    return res.status(400).json({ msg: "All fields are required!" });
+  }
+  try {
+    const existingUser = await UserModel.findOne({ email });
+    if (existingUser) {
+      return res.status(409).json({ msg: "User already exists!" });
+    }
+
+    const existingOtp = await OtpModel.findById(otpid);
+    if (!existingOtp) {
+      return res.status(400).json({ msg: "OTP not found! resend" });
+    }
+    if (existingOtp.otp !== otp) {
+      return res.status(400).json({ msg: "Wrong OTP" });
+    }
+    const newUser = new UserModel({
+      name,
+      email,
+      password
+    });
+    await newUser.save();
+    await newOtp.remove();
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ msg: "Internal server error", error: error.message });
+  }
+}
 async function loginSendOtp(req, res) {}
 async function loginVerifyOtp(req, res) {}
 
