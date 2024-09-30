@@ -122,8 +122,12 @@ async function loginVerifyOtp(req, res) {
     if (!existingUser) {
       return res.status(404).json({ msg: "User not found!" });
     }
-    if (existingUser.password !== password) {
-      return res.status(400).json({ msg: "Wrong password" });
+    const isPasswordCorrect = await bcrypt.compare(
+      password,
+      existingUser.password
+    );
+    if (!isPasswordCorrect) {
+      throw new Error("Wrong password");
     }
     const existingOtp = await OtpModel.findById(otpid);
     if (!existingOtp) {
@@ -154,7 +158,11 @@ async function loginVerifyOtp(req, res) {
 
     await OtpModel.findByIdAndDelete(existingOtp._id);
 
-    return res.status(200).json({ msg: "Login successful", token });
+    existingUser.password = "";
+
+    return res
+      .status(200)
+      .json({ msg: "Login successful", user: existingUser });
   } catch (error) {
     console.log(error);
     return res
