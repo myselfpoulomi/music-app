@@ -1,4 +1,18 @@
 import express from "express";
+import {
+  sendOtp,
+  verifyOtpNCreateUser,
+  updateName,
+  getUser,
+  createPlaylist,
+  addSongToPlaylist,
+  removeSongFromPlaylist,
+  getAllPlaylists,
+  getPlaylist,
+  updatePlaylistName,
+  deletePlaylist
+} from "../controllers/UserController.js";
+
 const UserRouter = express.Router();
 
 UserRouter.post("/user/send-otp", sendOtp);
