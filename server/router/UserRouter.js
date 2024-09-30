@@ -31,12 +31,24 @@ UserRouter.get("/user/get-user", AuthToken, getUser);
 UserRouter.put("/user/update-name", AuthToken, updateName);
 
 /* ====== Playlist Management Routes ====== */
-UserRouter.post("/user/create-playlist", createPlaylist);
-UserRouter.post("/user/add-song-to-playlist", addSongToPlaylist);
-UserRouter.post("/user/remove-song-from-playlist", removeSongFromPlaylist);
-UserRouter.get("/user/get-all-playlists/:userid", getAllPlaylists);
-UserRouter.get("/user/get-playlist/:playlistid", getPlaylist);
-UserRouter.put("/user/update-playlist-name/:playlistid", updatePlaylistName);
-UserRouter.delete("/user/delete-playlist/:playlistid", deletePlaylist);
+UserRouter.post("/user/create-playlist", AuthToken, createPlaylist);
+UserRouter.post("/user/add-song-to-playlist", AuthToken, addSongToPlaylist);
+UserRouter.post(
+  "/user/remove-song-from-playlist",
+  AuthToken,
+  removeSongFromPlaylist
+);
+UserRouter.get("/user/get-all-playlists/:userid", AuthToken, getAllPlaylists);
+UserRouter.get("/user/get-playlist/:playlistid", AuthToken, getPlaylist);
+UserRouter.put(
+  "/user/update-playlist-name/:playlistid",
+  AuthToken,
+  updatePlaylistName
+);
+UserRouter.delete(
+  "/user/delete-playlist/:playlistid",
+  AuthToken,
+  deletePlaylist
+);
 
 export default UserRouter;
