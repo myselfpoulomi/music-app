@@ -15,7 +15,7 @@ async function registerSendOtp(req, res) {
       return res.status(409).json({ msg: "User already exists!" });
     }
 
-    const otp = GenerateOTP();
+    const otp = GenerateOTP(5);
     const newOtp = new OtpModel({ email, otp });
 
     await newOtp.save();

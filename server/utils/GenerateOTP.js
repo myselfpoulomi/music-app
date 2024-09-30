@@ -1,9 +1,6 @@
 function GenerateOTP(n) {
-  const digits = "0123456789";
-  let OTP = "";
-  OTP += digits[Math.floor(Math.random() * 9) + 1];
-  for (let i = 1; i < n; i++) {
-    OTP += digits[Math.floor(Math.random() * 10)];
-  }
-  return OTP;
+  const firstDigit = Math.floor(Math.random() * 9) + 1;
+  const remainingDigits = Math.floor(Math.random() * Math.pow(10, n - 1));
+  return firstDigit * Math.pow(10, n - 1) + remainingDigits;
 }
+export default GenerateOTP;
