@@ -242,8 +242,11 @@ async function addSongToPlaylist(req, res) {
       return res.status(404).json({ msg: "User not found!" });
     }
 
-    if (!existingUser.playlists.includes(playlistid)) {
-      return res.status(404).json({ msg: "Playlist not found on user!" });
+    if (
+      !existingUser.playlists ||
+      !existingUser.playlists.includes(playlistid)
+    ) {
+      return res.status(400).json({ msg: "Playlist not found on user!" });
     }
 
     if (!playlist) {
@@ -279,8 +282,12 @@ async function removeSongFromPlaylist(req, res) {
     ]);
 
     if (!existingUser) return res.status(400).json({ msg: "User not found" });
-    if (!existingUser.playlists.includes(playlistid))
-      return res.status(400).json({ msg: "Playlist not found on user" });
+    if (
+      !existingUser.playlists ||
+      !existingUser.playlists.includes(playlistid)
+    ) {
+      return res.status(400).json({ msg: "Playlist not found on user!" });
+    }
     if (!playlist) return res.status(400).json({ msg: "Playlist not found" });
     if (!playlist.songs.includes(songid))
       return res.status(400).json({ msg: "Song not present on playlist" });
@@ -297,7 +304,38 @@ async function removeSongFromPlaylist(req, res) {
 }
 async function getAllPlaylists(req, res) {}
 async function getPlaylist(req, res) {}
-async function updatePlaylistName(req, res) {}
+async function updatePlaylistName(req, res) {
+  const { playlistid } = req.params;
+  const { name } = req.body;
+  try {
+    const [playlist, existingUser] = await Promise.all([
+      UserModel.findById(req.id),
+      PlaylistModel.findById(playlistid)
+    ]);
+
+    if (!playlist) {
+      return res.status(400).json({ msg: "Playlist not found!" });
+    }
+    if (!existingUser) {
+      return res.status(400).json({ msg: "User not found!" });
+    }
+
+    if (
+      !existingUser.playlists ||
+      !existingUser.playlists.includes(playlistid)
+    ) {
+      return res.status(400).json({ msg: "Playlist not found on user!" });
+    }
+
+    playlist.name = name;
+    await playlist.save();
+
+    return res.status(200).json({ msg: "Playlist name updated successfully" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: "Internal server error" });
+  }
+}
 async function deletePlaylist(req, res) {
   const { playlistid } = req.params;
   if (!playlistid) {
@@ -313,8 +351,11 @@ async function deletePlaylist(req, res) {
       return res.status(404).json({ msg: "User not found" });
     }
 
-    if (!existingUser.playlists.includes(playlistid)) {
-      return res.status(404).json({ msg: "Playlist not found on user" });
+    if (
+      !existingUser.playlists ||
+      !existingUser.playlists.includes(playlistid)
+    ) {
+      return res.status(400).json({ msg: "Playlist not found on user!" });
     }
 
     if (!playlist) {
