@@ -22,7 +22,8 @@ const userSchema = mongoose.Schema({
   playlists: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Playlist"
+      ref: "Playlist",
+      default: []
     }
   ]
 });

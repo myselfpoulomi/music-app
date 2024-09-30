@@ -59,10 +59,12 @@ async function registerVerify(req, res) {
     if (existingOtp.otp !== otp) {
       return res.status(400).json({ msg: "Wrong OTP" });
     }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new UserModel({
       name,
       email,
-      password
+      password: hashedPassword
     });
     await newUser.save();
     await newOtp.remove();
