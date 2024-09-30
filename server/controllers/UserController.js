@@ -112,7 +112,56 @@ async function loginSendOtp(req, res) {
       .json({ msg: "Internal server error", error: error.message });
   }
 }
-async function loginVerifyOtp(req, res) {}
+async function loginVerifyOtp(req, res) {
+  const { otpid, otp, email, password } = req.body;
+  if (!otpid || !otp || !email || !password) {
+    return res.status(400).json({ msg: "All fields are required!" });
+  }
+  try {
+    const existingUser = await UserModel.findOne({ email });
+    if (!existingUser) {
+      return res.status(404).json({ msg: "User not found!" });
+    }
+    if (existingUser.password !== password) {
+      return res.status(400).json({ msg: "Wrong password" });
+    }
+    const existingOtp = await OtpModel.findById(otpid);
+    if (!existingOtp) {
+      return res.status(400).json({ msg: "OTP not found! Resend" });
+    }
+
+    if (existingOtp.otp !== otp) {
+      return res.status(400).json({ msg: "Wrong OTP" });
+    }
+
+    const token = jwt.sign(
+      {
+        id: existingUser._id,
+        email: existingUser.email,
+        name: existingUser.name,
+        role: existingUser.role
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "30d" }
+    );
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+      secure: true,
+      sameSite: "None"
+    });
+
+    await OtpModel.findByIdAndDelete(existingOtp._id);
+
+    return res.status(200).json({ msg: "Login successful", token });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ msg: "Internal server error", error: error.message });
+  }
+}
 
 /* ====== User Profile ====== */
 async function updateName(req, res) {}
