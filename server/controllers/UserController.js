@@ -305,7 +305,7 @@ async function deletePlaylist(req, res) {
   }
   try {
     const [existingUser, playlist] = await Promise.all([
-      UserModel.findById(userId),
+      UserModel.findById(req.id),
       PlaylistModel.findById(playlistid)
     ]);
 
