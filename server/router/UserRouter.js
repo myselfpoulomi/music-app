@@ -1,4 +1,5 @@
 import express from "express";
+import AuthToken from "../middleware/AuthUser.js";
 import {
   registerSendOtp,
   registerVerify,
@@ -26,7 +27,7 @@ UserRouter.post("/user/login/send-otp", loginSendOtp);
 UserRouter.post("/user/login/verify-otp", loginVerifyOtp);
 
 /* ====== User Profile Routes ====== */
-UserRouter.get("/user/get-user", getUser);
+UserRouter.get("/user/get-user", AuthToken, getUser);
 UserRouter.put("/user/update-name/:userid", updateName);
 
 /* ====== Playlist Management Routes ====== */

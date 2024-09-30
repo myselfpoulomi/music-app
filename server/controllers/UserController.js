@@ -129,14 +129,14 @@ async function loginVerifyOtp(req, res) {
     if (!isPasswordCorrect) {
       throw new Error("Wrong password");
     }
-    const existingOtp = await OtpModel.findById(otpid);
-    if (!existingOtp) {
-      return res.status(400).json({ msg: "OTP not found! Resend" });
-    }
 
-    if (existingOtp.otp !== otp) {
-      return res.status(400).json({ msg: "Wrong OTP" });
-    }
+    // const existingOtp = await OtpModel.findById(otpid);
+    // if (!existingOtp) {
+    //   return res.status(400).json({ msg: "OTP not found! Resend" });
+    // }
+    // if (existingOtp.otp !== otp) {
+    //   return res.status(400).json({ msg: "Wrong OTP" });
+    // }
 
     const token = jwt.sign(
       {
@@ -156,7 +156,7 @@ async function loginVerifyOtp(req, res) {
       sameSite: "None"
     });
 
-    await OtpModel.findByIdAndDelete(existingOtp._id);
+    // await OtpModel.findByIdAndDelete(existingOtp._id);
 
     existingUser.password = "";
 
@@ -173,7 +173,22 @@ async function loginVerifyOtp(req, res) {
 
 /* ====== User Profile ====== */
 async function updateName(req, res) {}
-async function getUser(req, res) {}
+async function getUser(req, res) {
+  const { role } = req;
+  if (role !== "user") {
+    return res.status(403).json({ msg: "Unauthorized" });
+  }
+  try {
+    const user = await UserModel.findById(req.id).select("-password");
+    if (!user) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+    return res.status(200).json({ msg: "User fetched successfully", user });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: "Internal server error" });
+  }
+}
 
 /* ====== Playlist Management ====== */
 async function createPlaylist(req, res) {}

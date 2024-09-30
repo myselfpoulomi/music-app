@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import cors from "cors"
+import cookieParser from "cookie-parser"
 import artistRouter from './router/artistRouter.js';
 import albumRouter from './router/albumRouter.js';
 import songRouter from './router/songRouter.js';
@@ -14,6 +15,7 @@ const PORT = process.env.PORT || 5101;
 const MONGO_URL = process.env.MONGO_URL
 
 app.use(express.json())
+app.use(cookieParser());
 app.use(cors({
     origin: '*',
 }));
