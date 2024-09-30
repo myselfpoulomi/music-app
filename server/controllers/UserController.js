@@ -172,7 +172,23 @@ async function loginVerifyOtp(req, res) {
 }
 
 /* ====== User Profile ====== */
-async function updateName(req, res) {}
+async function updateName(req, res) {
+  const { role } = req;
+  if (role !== "user") {
+    return res.status(403).json({ msg: "Unauthorized" });
+  }
+  const { name } = req.body;
+  try {
+    const existingUser = await UserModel.findByIdAndUpdate(req.id, { name });
+    if (!existingUser) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+    return res.status(200).json({ msg: "Name updated successfully" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: "Internal server error" });
+  }
+}
 async function getUser(req, res) {
   const { role } = req;
   if (role !== "user") {

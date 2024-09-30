@@ -28,7 +28,7 @@ UserRouter.post("/user/login/verify-otp", loginVerifyOtp);
 
 /* ====== User Profile Routes ====== */
 UserRouter.get("/user/get-user", AuthToken, getUser);
-UserRouter.put("/user/update-name/:userid", updateName);
+UserRouter.put("/user/update-name", AuthToken, updateName);
 
 /* ====== Playlist Management Routes ====== */
 UserRouter.post("/user/create-playlist", createPlaylist);
