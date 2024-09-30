@@ -2,6 +2,7 @@ import UserModel from "../models/UserModel.js";
 import OtpModel from "../models/otpModel.js";
 import PlaylistModel from "../models/PlaylistModel.js";
 import GenerateOTP from "../utils/GenerateOTP.js";
+import SongModel from "../models/songModel.js";
 import SendMail from "../utils/SendMai.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
@@ -221,14 +222,43 @@ async function createPlaylist(req, res) {
     await UserModel.findByIdAndUpdate(req.id, {
       $push: { playlists: newPlaylist._id }
     });
-    
+
     return res.status(200).json({ msg: "Playlist created successfully" });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ msg: "Internal server error" });
   }
 }
-async function addSongToPlaylist(req, res) {}
+async function addSongToPlaylist(req, res) {
+  const { playlistid, songid } = req.body;
+  try {
+    const existingUser = await UserModel.findById(req.id);
+    const playlist = await PlaylistModel.findById(playlistid);
+    if (!existingUser.playlists.includes(playlistid) || !playlist) {
+      return res.status(404).json({ msg: "Playlist not found" });
+    }
+
+    const song = await SongModel.findById(songid);
+    if (!song) {
+      return res.status(404).json({ msg: "Song not found" });
+    }
+
+    if (playlist.songs.includes(songid)) {
+      return res.status(400).json({ msg: "Song is already present" });
+    }
+
+    await PlaylistModel.findByIdAndUpdate(playlistid, {
+      $push: {
+        songs: songid
+      }
+    });
+
+    return res.status(200).json({ msg: "Song added to playlist" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: "Internal server error" });
+  }
+}
 async function removeSongFromPlaylist(req, res) {}
 async function getAllPlaylists(req, res) {}
 async function getPlaylist(req, res) {}
