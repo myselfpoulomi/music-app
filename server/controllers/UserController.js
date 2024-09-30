@@ -232,13 +232,24 @@ async function createPlaylist(req, res) {
 async function addSongToPlaylist(req, res) {
   const { playlistid, songid } = req.body;
   try {
-    const existingUser = await UserModel.findById(req.id);
-    const playlist = await PlaylistModel.findById(playlistid);
-    if (!existingUser.playlists.includes(playlistid) || !playlist) {
+    const [existingUser, playlist, song] = await Promise.all([
+      UserModel.findById(req.id),
+      PlaylistModel.findById(playlistid),
+      SongModel.findById(songid)
+    ]);
+
+    if (!existingUser) {
+      return res.status(404).json({ msg: "User not found!" });
+    }
+
+    if (!existingUser.playlists.includes(playlistid)) {
+      return res.status(404).json({ msg: "Playlist not found on user!" });
+    }
+
+    if (!playlist) {
       return res.status(404).json({ msg: "Playlist not found" });
     }
 
-    const song = await SongModel.findById(songid);
     if (!song) {
       return res.status(404).json({ msg: "Song not found" });
     }
@@ -247,11 +258,8 @@ async function addSongToPlaylist(req, res) {
       return res.status(400).json({ msg: "Song is already present" });
     }
 
-    await PlaylistModel.findByIdAndUpdate(playlistid, {
-      $push: {
-        songs: songid
-      }
-    });
+    playlist.songs.push(songid);
+    await playlist.save();
 
     return res.status(200).json({ msg: "Song added to playlist" });
   } catch (error) {
