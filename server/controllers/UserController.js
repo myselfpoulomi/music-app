@@ -267,7 +267,32 @@ async function addSongToPlaylist(req, res) {
     return res.status(500).json({ msg: "Internal server error" });
   }
 }
-async function removeSongFromPlaylist(req, res) {}
+async function removeSongFromPlaylist(req, res) {
+  const { playlistid, songid } = req.body;
+  if (!playlistid || !songid)
+    return res.status(400).json({ msg: "Fill all the fields" });
+  try {
+    const [existingUser, playlist, song] = await Promise.all([
+      UserModel.findById(req.id),
+      PlaylistModel.findById(playlistid),
+      SongModel.findById(songid)
+    ]);
+
+    if (!existingUser) return res.status(400).json({ msg: "User not found" });
+    if (!existingUser.playlist.includes(playlistid))
+      return res.status(400).json({ msg: "Playlist not found on user" });
+    if (!playlist) return res.status(400).json({ msg: "Playlist not found" });
+    if (!song) return res.status(400).json({ msg: "Song not found" });
+
+    playlist.songs.pull(songid);
+    await playlist.save();
+
+    return res.status(200).json({ msg: "Song removed from playlist" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: "Internal server error" });
+  }
+}
 async function getAllPlaylists(req, res) {}
 async function getPlaylist(req, res) {}
 async function updatePlaylistName(req, res) {}
