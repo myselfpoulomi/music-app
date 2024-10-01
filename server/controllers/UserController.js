@@ -173,11 +173,32 @@ async function loginWithPassword(req, res) {
     if (!existingUser) {
       return res.status(400).json({ msg: "User not found!" });
     }
-    const isPasswordCorrect =await bcrypt.compare(password, existingUser.password);
+    const isPasswordCorrect = await bcrypt.compare(
+      password,
+      existingUser.password
+    );
     if (!isPasswordCorrect) {
       return res.status(400).json({ msg: "Invalid password" });
     }
     existingUser.password = "";
+    const token = jwt.sign(
+      {
+        id: existingUser._id,
+        email: existingUser.email,
+        name: existingUser.name,
+        role: existingUser.role
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "30d" }
+    );
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+      secure: true,
+      sameSite: "None"
+    });
+
     return res.status(300).json({ user: existingUser });
   } catch (error) {
     console.log(error);
@@ -319,8 +340,9 @@ async function getPlaylist(req, res) {}
 async function updatePlaylistName(req, res) {
   const { playlistid } = req.params;
   const { name } = req.body;
+  if (!name) return res.status(400).json({ msg: "Name field required" });
   try {
-    const [playlist, existingUser] = await Promise.all([
+    const [existingUser, playlist] = await Promise.all([
       UserModel.findById(req.id),
       PlaylistModel.findById(playlistid)
     ]);
@@ -328,9 +350,12 @@ async function updatePlaylistName(req, res) {
     if (!playlist) {
       return res.status(400).json({ msg: "Playlist not found!" });
     }
+
     if (!existingUser) {
       return res.status(400).json({ msg: "User not found!" });
     }
+
+    console.log(existingUser);
 
     if (
       !existingUser.playlists ||
