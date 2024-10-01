@@ -335,7 +335,20 @@ async function removeSongFromPlaylist(req, res) {
     return res.status(500).json({ msg: "Internal server error" });
   }
 }
-async function getAllPlaylists(req, res) {}
+async function getAllPlaylists(req, res) {
+  try {
+    const existingUser = await UserModel.findById(req.id)
+      .select("-password")
+      .populate({
+        path: "playlists",
+        populate: {
+          path: "songs"
+        }
+      });
+    console.log(existingUser);
+    return res.status(200).json({ existingUser });
+  } catch (error) {}
+}
 async function getPlaylist(req, res) {
   const { playlistid } = req.params;
   try {

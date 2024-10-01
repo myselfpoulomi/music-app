@@ -40,7 +40,7 @@ UserRouter.post(
   AuthToken,
   removeSongFromPlaylist
 );
-UserRouter.get("/user/get-all-playlists/:userid", AuthToken, getAllPlaylists);
+UserRouter.get("/user/get-all-playlists", AuthToken, getAllPlaylists);
 UserRouter.get("/user/get-playlist/:playlistid", AuthToken, getPlaylist);
 UserRouter.put(
   "/user/update-playlist-name/:playlistid",
