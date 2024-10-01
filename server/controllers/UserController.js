@@ -341,7 +341,7 @@ async function getPlaylist(req, res) {
   try {
     const [existingUser, playlist] = await Promise.all([
       UserModel.findById(req.id),
-      PlaylistModel.findById(playlistid).populate(songs)
+      PlaylistModel.findById(playlistid).populate("songs")
     ]);
     if (!playlist) {
       return res.status(400).json({ msg: "playlist not found" });
