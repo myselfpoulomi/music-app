@@ -336,7 +336,25 @@ async function removeSongFromPlaylist(req, res) {
   }
 }
 async function getAllPlaylists(req, res) {}
-async function getPlaylist(req, res) {}
+async function getPlaylist(req, res) {
+  const { playlistid } = req.params;
+  try {
+    const [existingUser, playlist] = await Promise.all([
+      UserModel.findById(req.id),
+      PlaylistModel.findById(playlistid).populate(songs)
+    ]);
+    if (!playlist) {
+      return res.status(400).json({ msg: "playlist not found" });
+    }
+    if (!existingUser.playlists.includes(playlistid)) {
+      return res.status(400).json({ msg: "Playlist not found on user" });
+    }
+    return res.status(200).json({ playlist });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: "Internal server error" });
+  }
+}
 async function updatePlaylistName(req, res) {
   const { playlistid } = req.params;
   const { name } = req.body;
