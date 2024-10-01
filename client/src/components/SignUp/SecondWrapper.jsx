@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { InputOTPPattern } from "./InputOTPPattern";
 
+// otpid, otp (sended on email), email
 
+function SecondWrapper({settoggleSignUp , setemail ,email, otpid}) {
+  const [otp, setotp] = useState("");
+   async function handleVerifyOTP(){
+      try {
+        const {data} = await axios.post (`http://localhost:5100/user/register/verify-otp`, {email,otpid,})
+      } catch (error) {
+        
+      }
+      settoggleSignUp([false,false,true]);
 
-function SecondWrapper({settoggleSignUp}) {
-    function handleVerifyOTP(){
-        settoggleSignUp([false,false,true]);
+    }
+
+    function handleOTP (e) {
+      console.log(e);
+      
     }
 
   return (
@@ -18,7 +30,7 @@ function SecondWrapper({settoggleSignUp}) {
           proceed...
         </p>
         <div className="flex justify-center flex-col items-center ">
-        <InputOTPPattern/>
+        <InputOTPPattern onChange={handleOTP}/>
         <button onClick={handleVerifyOTP}
         className="border border-white rounded-full p-[12px] mt-5 w-[350px] mx-4 text-white">
           Verify

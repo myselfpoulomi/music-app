@@ -3,8 +3,9 @@ import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-function FirstWrapper({ settoggleSignUp }) {
-  const [email, setemail] = useState("");
+function FirstWrapper({ settoggleSignUp , setemail ,email , setotpid }) {
+  // const [email, setemail] = useState("");
+
   const handleSendOTP = async () => {
     if (email == "") {
       toast.warning("Enter Email Correctly!");
@@ -19,7 +20,7 @@ function FirstWrapper({ settoggleSignUp }) {
         `http://localhost:5100/user/register/send-otp`,
         { email }
       );
-      console.log(data);
+      setotpid(data.otpid);
       settoggleSignUp([false, true, false]);
       
     } catch (error) {
