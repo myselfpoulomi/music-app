@@ -9,10 +9,10 @@ import jwt from "jsonwebtoken";
 
 /* ====== User Authentication ====== */
 async function registerSendOtp(req, res) {
-  const { name, password, email } = req.body;
+  const { email } = req.body;
   try {
-    if (!name || !password || !email) {
-      return res.status(400).json({ msg: "All fields are required!" });
+    if ( !email) {
+      return res.status(400).json({ msg: "Email is required!" });
     }
 
     const existingUser = await UserModel.findOne({ email });
@@ -78,6 +78,10 @@ async function registerVerify(req, res) {
       .status(500)
       .json({ msg: "Internal server error", error: error.message });
   }
+}
+
+async function registerCreateUser(req,res){
+
 }
 async function loginSendOtp(req, res) {
   const { email } = req.body;
@@ -445,6 +449,7 @@ async function deletePlaylist(req, res) {
 export {
   /* User Authentication */
   registerSendOtp,
+  registerCreateUser,
   registerVerify,
   loginSendOtp,
   loginVerifyOtp,

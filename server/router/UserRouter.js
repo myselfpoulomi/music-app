@@ -14,14 +14,16 @@ import {
   getPlaylist,
   updatePlaylistName,
   deletePlaylist,
-  loginWithPassword
+  loginWithPassword,
+  registerCreateUser
 } from "../controllers/UserController.js";
 
 const UserRouter = express.Router();
 
 /* ====== Registration Routes ====== */
 UserRouter.post("/user/register/send-otp", registerSendOtp);
-UserRouter.post("/user/register/verify-otp/create-user", registerVerify);
+UserRouter.post("/user/register/verify-otp", registerVerify);
+UserRouter.post("/user/register/create-user", registerCreateUser);
 
 /* ====== Login Routes ====== */
 UserRouter.post("/user/login/send-otp", loginSendOtp);
