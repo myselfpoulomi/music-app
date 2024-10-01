@@ -13,7 +13,8 @@ import {
   getAllPlaylists,
   getPlaylist,
   updatePlaylistName,
-  deletePlaylist
+  deletePlaylist,
+  loginWithPassword
 } from "../controllers/UserController.js";
 
 const UserRouter = express.Router();
@@ -25,6 +26,7 @@ UserRouter.post("/user/register/verify-otp/create-user", registerVerify);
 /* ====== Login Routes ====== */
 UserRouter.post("/user/login/send-otp", loginSendOtp);
 UserRouter.post("/user/login/verify-otp", loginVerifyOtp);
+UserRouter.post("/user/login/with-password", loginWithPassword);
 
 /* ====== User Profile Routes ====== */
 UserRouter.get("/user/get-user", AuthToken, getUser);

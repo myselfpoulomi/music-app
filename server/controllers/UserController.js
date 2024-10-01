@@ -115,30 +115,23 @@ async function loginSendOtp(req, res) {
   }
 }
 async function loginVerifyOtp(req, res) {
-  const { otpid, otp, email, password } = req.body;
-  if (!otpid || !otp || !email || !password) {
+  const { otpid, otp, email } = req.body;
+  if (!otpid || !otp || !email) {
     return res.status(400).json({ msg: "All fields are required!" });
   }
   try {
-    const existingUser = await UserModel.findOne({ email });
+    const existingUser = await UserModel.findOne({ email }).select("-password");
     if (!existingUser) {
       return res.status(404).json({ msg: "User not found!" });
     }
-    const isPasswordCorrect = await bcrypt.compare(
-      password,
-      existingUser.password
-    );
-    if (!isPasswordCorrect) {
-      throw new Error("Wrong password");
-    }
 
-    // const existingOtp = await OtpModel.findById(otpid);
-    // if (!existingOtp) {
-    //   return res.status(400).json({ msg: "OTP not found! Resend" });
-    // }
-    // if (existingOtp.otp !== otp) {
-    //   return res.status(400).json({ msg: "Wrong OTP" });
-    // }
+    const existingOtp = await OtpModel.findById(otpid);
+    if (!existingOtp) {
+      return res.status(400).json({ msg: "OTP not found! Resend" });
+    }
+    if (existingOtp.otp !== otp) {
+      return res.status(400).json({ msg: "Wrong OTP" });
+    }
 
     const token = jwt.sign(
       {
@@ -158,9 +151,7 @@ async function loginVerifyOtp(req, res) {
       sameSite: "None"
     });
 
-    // await OtpModel.findByIdAndDelete(existingOtp._id);
-
-    existingUser.password = "";
+    await OtpModel.findByIdAndDelete(existingOtp._id);
 
     return res
       .status(200)
@@ -170,6 +161,27 @@ async function loginVerifyOtp(req, res) {
     return res
       .status(500)
       .json({ msg: "Internal server error", error: error.message });
+  }
+}
+async function loginWithPassword(req, res) {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({ msg: "All fields are required!" });
+  }
+  try {
+    const existingUser = await UserModel.findOne({ email });
+    if (!existingUser) {
+      return res.status(400).json({ msg: "User not found!" });
+    }
+    const isPasswordCorrect =await bcrypt.compare(password, existingUser.password);
+    if (!isPasswordCorrect) {
+      return res.status(400).json({ msg: "Invalid password" });
+    }
+    existingUser.password = "";
+    return res.status(300).json({ user: existingUser });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: "Internal server error" });
   }
 }
 
@@ -380,6 +392,7 @@ export {
   registerVerify,
   loginSendOtp,
   loginVerifyOtp,
+  loginWithPassword,
   /* User Profile */
   updateName,
   getUser,
