@@ -15,6 +15,7 @@ function FirstWrapper({settoggleSignUp}) {
     }
 
 
+    settoggleSignUp([false,true,false]);
     
     
   }

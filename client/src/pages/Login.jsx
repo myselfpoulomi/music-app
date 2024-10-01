@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import FirstWrapper from '../components/SignUp/FirstWrapper'
+import SecondWrapper from "@/components/SignUp/SecondWrapper";
+import ThirdWrapper from "@/components/SignUp/ThirdWrapper";
 
 function Login() {
   const [toggle, settoggle] = useState(false);
@@ -14,7 +16,16 @@ function Login() {
       <div className="flex">
         {toggle ? (
           <div>
-            <FirstWrapper settoggleSignUp={settoggleSignUp}/>
+            {
+              toggleSignUp[0] && <FirstWrapper settoggleSignUp={settoggleSignUp}/>
+            }
+            {
+              toggleSignUp[1] && <SecondWrapper settoggleSignUp={settoggleSignUp}/>
+            }
+            {
+              toggleSignUp[2] && <ThirdWrapper settoggleSignUp={settoggleSignUp}/>
+            }
+            
           </div>
           // <div className="bg-teal-900 py-[1rem] w-[500px]  flex flex-col  justify-center rounded-lg ">
           //   <h1 className="text-white text-[30px] px-4 mx-2">Sign Up</h1>

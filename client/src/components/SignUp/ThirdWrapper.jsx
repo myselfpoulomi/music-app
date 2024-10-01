@@ -1,6 +1,6 @@
 import React from 'react'
 
-function ThirdWrapper () {
+function ThirdWrapper ({settoggleSignUp}) {
     return (
         <div>ThrirdWrapper</div>
     )
