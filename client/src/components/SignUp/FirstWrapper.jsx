@@ -3,7 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-function FirstWrapper({ settoggleSignUp , setemail ,email , setotpid }) {
+function FirstWrapper({ settoggleSignUp, setemail, email, setotpid }) {
   // const [email, setemail] = useState("");
 
   const handleSendOTP = async () => {
@@ -22,13 +22,10 @@ function FirstWrapper({ settoggleSignUp , setemail ,email , setotpid }) {
       );
       setotpid(data.otpid);
       settoggleSignUp([false, true, false]);
-      
     } catch (error) {
-      toast.warning(error.response?.data?.msg||error.message);
+      toast.warning(error.response?.data?.msg || error.message);
       console.log(error);
     }
-
-    
   };
 
   return (
@@ -42,7 +39,6 @@ function FirstWrapper({ settoggleSignUp , setemail ,email , setotpid }) {
           className="p-6 mx-4 rounded-full w-[400px]  text-black h-[10px] outline-none"
           onChange={(e) => {
             setemail(e.target.value);
-
           }}
         />
         <button

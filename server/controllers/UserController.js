@@ -104,7 +104,25 @@ async function registerCreateUser(req, res) {
     });
     await newUser.save();
 
-    return res.status(200).json({ msg: "User created successfully" });
+    const token = jwt.sign(
+      {
+        id: existingUser._id,
+        email: existingUser.email,
+        name: existingUser.name,
+        role: existingUser.role
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "30d" }
+    );
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+      secure: true,
+      sameSite: "None"
+    });
+
+    return res.status(200).json({ msg: "User created successfully", user });
   } catch (error) {
     console.log(error);
     return res
