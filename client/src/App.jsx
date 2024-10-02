@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Login from "./pages/Login";
 
 function App() {
+  const [user, setuser] = useState(null);
   return (
     <div className="containermain select-none">
       <Routes>

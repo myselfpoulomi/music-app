@@ -8,6 +8,18 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 /* ====== User Authentication ====== */
+
+async function logout(req, res) {
+  try {
+    res.clearCookie("token");
+    return res.status(200).json({ msg: "Logged out successfully!" });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ msg: "Internal server error", error: error.message });
+  }
+}
 async function registerSendOtp(req, res) {
   const { email } = req.body;
   try {
@@ -471,6 +483,7 @@ export {
   loginSendOtp,
   loginVerifyOtp,
   loginWithPassword,
+  logout,
   /* User Profile */
   updateName,
   getUser,

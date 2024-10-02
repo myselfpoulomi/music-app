@@ -28,10 +28,10 @@ function Home() {
               <GoPlusCircle />
             </div>
           </div>
-        
-        <div>
-          <PlayList />
-        </div>
+
+          <div>
+            <PlayList />
+          </div>
         </div>
       </div>
       <div className="main-right scrollNone  bg-[#161717]">
