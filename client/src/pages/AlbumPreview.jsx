@@ -89,7 +89,7 @@ function AlbumPreview() {
   }, [album]);
 
   return isLoading ? (
-    <div className="h-[85vh] w-[100%] flex items-center justify-center">
+    <div className="h-[85vh] w-[100%] flex items-center justify-center ">
       <SyncLoader color="#ffffff" margin={5} size={10} />
     </div>
   ) : (

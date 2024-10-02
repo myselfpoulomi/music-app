@@ -17,14 +17,14 @@ body {
 }
 
 .main-left {
-  width: 20%;
-  background-color: rgb(6, 104, 104);;
+  width: 15%;
+  background-color: rgb(21, 33, 33);;
 
 }
 
 .main-right {
-  width: 80%;
-  background-color: #2d3137;
+  width: 85%;
+  background-color: #121315;
   height: 100vh;
   overflow-y: auto;
   /* padding-top: 5rem; */

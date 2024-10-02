@@ -20,17 +20,10 @@ function Nav() {
   }
   return (
     
-    <div className="sticky top-0 bg-[rgb(24,23,23)]">
+    <div className="sticky top-0 bg-[rgb(24,23,23)] ">
       <nav className="navbar ">
-        {/* navlists */}
-        {/* <ul className="nav-l">
-          <li>Discover</li>
-          <li>My Library</li>
-          <li>Radio</li>
-        </ul> */}
-
         <GrHomeRounded
-          className="text-white font-bold text-[30px] cursor-pointer"
+          className="text-white font-thin text-[30px] cursor-pointer"
           onClick={() => {
             navigate("/");
           }}
