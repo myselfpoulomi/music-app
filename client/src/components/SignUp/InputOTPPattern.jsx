@@ -11,11 +11,11 @@ export default function InputOTPPattern({ otp, setotp }) {
       <h2 className="text-2xl font-bold mb-4">Enter OTP</h2>
       <InputOTP maxLength={5} value={otp} onChange={(value) => setotp(value)}>
         <InputOTPGroup>
-          <InputOTPSlot index={0} />
-          <InputOTPSlot index={1} />
-          <InputOTPSlot index={2} />
-          <InputOTPSlot index={3} />
-          <InputOTPSlot index={4} />
+          <InputOTPSlot index={0} className="h-[60px] w-[60px] text-[18px]" />
+          <InputOTPSlot index={1} className="h-[60px] w-[60px] text-[18px]" />
+          <InputOTPSlot index={2} className="h-[60px] w-[60px] text-[18px]"/>
+          <InputOTPSlot index={3} className="h-[60px] w-[60px] text-[18px]"/>
+          <InputOTPSlot index={4} className="h-[60px] w-[60px] text-[18px]"/>
         </InputOTPGroup>
       </InputOTP>
     </div>
