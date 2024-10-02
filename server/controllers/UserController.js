@@ -106,10 +106,10 @@ async function registerCreateUser(req, res) {
 
     const token = jwt.sign(
       {
-        id: existingUser._id,
-        email: existingUser.email,
-        name: existingUser.name,
-        role: existingUser.role
+        id: newUser._id,
+        email: newUser.email,
+        name: newUser.name,
+        role: newUser.role
       },
       process.env.JWT_SECRET,
       { expiresIn: "30d" }
@@ -122,7 +122,9 @@ async function registerCreateUser(req, res) {
       sameSite: "None"
     });
 
-    return res.status(200).json({ msg: "User created successfully", user });
+    newUser.password = null;
+
+    return res.status(200).json({ msg: "User created successfully", user:newUser });
   } catch (error) {
     console.log(error);
     return res
