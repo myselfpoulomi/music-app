@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import FirstWrapper from '../components/SignUp/FirstWrapper'
+import FirstWrapper from "../components/SignUp/FirstWrapper";
 import SecondWrapper from "@/components/SignUp/SecondWrapper";
 import ThirdWrapper from "@/components/SignUp/ThirdWrapper";
 
 function Login() {
   const [toggle, settoggle] = useState(false);
-  const [toggleSignUp, settoggleSignUp] = useState([true,false,false]);
+  const [toggleSignUp, settoggleSignUp] = useState([true, false, false]);
   const [email, setemail] = useState("");
   const [otpid, setotpid] = useState("");
-  
 
   return (
     <div className="h-[100vh] w-[100vw] flex flex-col items-center justify-center bg-[rgba(14,14,14,0.9)] text-white \">
@@ -20,18 +19,26 @@ function Login() {
       <div className="flex">
         {toggle ? (
           <div>
-            {
-              toggleSignUp[0] && <FirstWrapper settoggleSignUp={settoggleSignUp}  setemail={setemail} email={email} setotpid={setotpid}/>
-            }
-            {
-              toggleSignUp[1] && <SecondWrapper settoggleSignUp={settoggleSignUp} setemail={setemail} email={email} otpid={otpid}/>
-            }
-            {
-              toggleSignUp[2] && <ThirdWrapper settoggleSignUp={settoggleSignUp}/>
-            }
-            
+            {toggleSignUp[0] && (
+              <FirstWrapper
+                settoggleSignUp={settoggleSignUp}
+                setemail={setemail}
+                email={email}
+                setotpid={setotpid}
+              />
+            )}
+            {toggleSignUp[1] && (
+              <SecondWrapper
+                settoggleSignUp={settoggleSignUp}
+                setemail={setemail}
+                email={email}
+                otpid={otpid}
+              />
+            )}
+            {toggleSignUp[2] && (
+              <ThirdWrapper settoggleSignUp={settoggleSignUp} />
+            )}
           </div>
-          
         ) : (
           <div className="flex">
             <div className="bg-teal-900 h-[70vh] w-[500px] flex flex-col  justify-center rounded-lg ">
@@ -63,20 +70,19 @@ function Login() {
                 </div>
                 <p className="underline decoration-solid">Forgot Password</p>
               </div>
-              </div>
-              <div className=" h-[70vh] w-[500px] rounded-lg bg-white text-teal-900 flex flex-col items-center justify-center">
-                <h1 className="text-[40px] font-bold">Welcome to Login</h1>
-                <p className="text-lg">Don't have an account?</p>
-                <button
-                  className="border bg-teal-800 text-white  rounded-full p-[12px] mt-5 w-[100px]"
-                  onClick={() => {
-                    settoggle((prev) => !prev);
-                  }}
-                >
-                  Sign Up
-                </button>
-              </div>
-
+            </div>
+            <div className=" h-[70vh] w-[500px] rounded-lg bg-white text-teal-900 flex flex-col items-center justify-center">
+              <h1 className="text-[40px] font-bold">Welcome to Login</h1>
+              <p className="text-lg">Don't have an account?</p>
+              <button
+                className="border bg-teal-800 text-white  rounded-full p-[12px] mt-5 w-[100px]"
+                onClick={() => {
+                  settoggle((prev) => !prev);
+                }}
+              >
+                Sign Up
+              </button>
+            </div>
           </div>
         )}
         {/* <div className='bg-teal-900 h-[70vh] w-[500px] flex flex-col  justify-center rounded-lg '>

@@ -1,25 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { InputOTPPattern } from "./InputOTPPattern";
+import InputOTPPattern from "./InputOTPPattern";
 
 // otpid, otp (sended on email), email
 
-function SecondWrapper({settoggleSignUp , setemail ,email, otpid}) {
+function SecondWrapper({ settoggleSignUp, setemail, email, otpid }) {
   const [otp, setotp] = useState("");
-   async function handleVerifyOTP(){
-      try {
-        const {data} = await axios.post (`http://localhost:5100/user/register/verify-otp`, {email,otpid,})
-      } catch (error) {
-        
-      }
-      settoggleSignUp([false,false,true]);
+  async function handleVerifyOTP() {
+    try {
+      const { data } = await axios.post(
+        `http://localhost:5100/user/register/verify-otp`,
+        { email, otpid }
+      );
+    } catch (error) {}
+    settoggleSignUp([false, false, true]);
+  }
 
-    }
-
-    function handleOTP (e) {
-      console.log(e);
-      
-    }
+  useEffect(() => {
+    console.log(otp);
+  }, [otp]);
 
   return (
     <div className="bg-teal-900 py-[1rem] w-[500px]  flex flex-col  justify-center rounded-lg ">
@@ -30,12 +29,14 @@ function SecondWrapper({settoggleSignUp , setemail ,email, otpid}) {
           proceed...
         </p>
         <div className="flex justify-center flex-col items-center ">
-        <InputOTPPattern onChange={handleOTP}/>
-        <button onClick={handleVerifyOTP}
-        className="border border-white rounded-full p-[12px] mt-5 w-[350px] mx-4 text-white">
-          Verify
-        </button>
-      </div>
+          <InputOTPPattern setotp={setotp} otp={otp} />
+          <button
+            onClick={handleVerifyOTP}
+            className="border border-white rounded-full p-[12px] mt-5 w-[350px] mx-4 text-white"
+          >
+            Verify
+          </button>
+        </div>
       </div>
     </div>
   );

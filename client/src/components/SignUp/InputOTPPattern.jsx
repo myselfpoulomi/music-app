@@ -1,36 +1,23 @@
-import { useState } from 'react';
-import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
-
+import React, { useState } from "react";
 import {
   InputOTP,
   InputOTPGroup,
-  InputOTPSlot,
+  InputOTPSlot
 } from "@/components/ui/input-otp";
 
-export function InputOTPPattern() {
-  const [otp, setOtp] = useState(["", "", "", "", ""]);
-
-  // Handler to update the OTP value for a specific index
-  const handleChange = (value, index) => {
-    const newOtp = [...otp];
-    newOtp[index] = value;
-    setOtp(newOtp);
-    console.log(newOtp.join("")); // Combine OTP values into a single string
-  };
-
+export default function InputOTPPattern({ otp, setotp }) {
   return (
-    <InputOTP maxLength={6} pattern={REGEXP_ONLY_DIGITS_AND_CHARS}>
-      <InputOTPGroup>
-        {otp.map((_, index) => (
-          <InputOTPSlot
-            key={index}
-            index={index}
-            className="w-[70px] h-[60px]"
-            value={otp[index]}
-            onChange={(e) => handleChange(e.target.value, index)}
-          />
-        ))}
-      </InputOTPGroup>
-    </InputOTP>
+    <div className="flex flex-col items-center space-y-4 p-8">
+      <h2 className="text-2xl font-bold mb-4">Enter OTP</h2>
+      <InputOTP maxLength={5} value={otp} onChange={(value) => setotp(value)}>
+        <InputOTPGroup>
+          <InputOTPSlot index={0} />
+          <InputOTPSlot index={1} />
+          <InputOTPSlot index={2} />
+          <InputOTPSlot index={3} />
+          <InputOTPSlot index={4} />
+        </InputOTPGroup>
+      </InputOTP>
+    </div>
   );
 }
