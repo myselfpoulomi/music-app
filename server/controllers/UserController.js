@@ -11,7 +11,7 @@ import jwt from "jsonwebtoken";
 async function registerSendOtp(req, res) {
   const { email } = req.body;
   try {
-    if ( !email) {
+    if (!email) {
       return res.status(400).json({ msg: "Email is required!" });
     }
 
@@ -44,8 +44,8 @@ async function registerSendOtp(req, res) {
   }
 }
 async function registerVerify(req, res) {
-  const { otpid, otp, name, email, password } = req.body;
-  if (!otpid || !otp || !name || !email || !password) {
+  const { otpid, otp, email } = req.body;
+  if (!otpid || !otp || !email) {
     return res.status(400).json({ msg: "All fields are required!" });
   }
   try {
@@ -62,16 +62,9 @@ async function registerVerify(req, res) {
       return res.status(400).json({ msg: "Wrong OTP" });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new UserModel({
-      name,
-      email,
-      password: hashedPassword
-    });
-    await newUser.save();
     await OtpModel.findByIdAndDelete(existingOtp._id);
 
-    return res.status(200).json({ msg: "User created successfully" });
+    return res.status(200).json({ msg: "OTP Verified successfully" });
   } catch (error) {
     console.log(error);
     return res
@@ -80,8 +73,32 @@ async function registerVerify(req, res) {
   }
 }
 
-async function registerCreateUser(req,res){
+async function registerCreateUser(req, res) {
+  const { name, email, password } = req.body;
+  if (!name || !email || !password) {
+    return res.status(400).json({ msg: "All fields are required!" });
+  }
+  try {
+    const existingUser = await UserModel.findOne({ email });
+    if (existingUser) {
+      return res.status(409).json({ msg: "User already exists!" });
+    }
 
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = new UserModel({
+      name,
+      email,
+      password: hashedPassword
+    });
+    await newUser.save();
+
+    return res.status(200).json({ msg: "User created successfully" });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ msg: "Internal server error", error: error.message });
+  }
 }
 async function loginSendOtp(req, res) {
   const { email } = req.body;
