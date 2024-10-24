@@ -9,8 +9,20 @@ function FirstWrapper({
   username,
   setusername,
   setPassword,
-  password
+  password,
+  settoggleSignUp,
 }) {
+  async function handleSendOTP() {
+    try {
+      const data = await axios.post(` http://localhost:5100/user/register/send-otp `, {username , email, password});
+      console.log(data);
+      
+    } catch (error) {
+      console.log(error);
+      
+      
+    }
+  }
   return (
     <div className="bg-teal-900 py-[1rem] w-[500px]  flex flex-col  justify-center rounded-lg ">
       <h1 className="text-white text-[30px] px-4 mx-2">Sign Up</h1>
@@ -20,6 +32,9 @@ function FirstWrapper({
           type="text"
           placeholder="Enter Username"
           className="p-6 mx-4 rounded-full w-[400px]  text-black h-[50px] outline-none"
+          onChange={(e) => {
+            setusername(e.target.value);
+          }}
         />
         <p className="text-white p-4 mx-4">Email Address</p>
         <input
@@ -35,8 +50,14 @@ function FirstWrapper({
           type="text"
           placeholder="Enter Password"
           className="p-6 mx-4 rounded-full w-[400px]  text-black h-[50px] outline-none"
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
         />
-        <button className="border border-white rounded-full p-[12px] mt-5 w-[400px] mx-4 text-white ">
+        <button
+          className="border border-white rounded-full p-[12px] mt-5 w-[400px] mx-4 text-white "
+          onClick={handleSendOTP}
+        >
           Sign Up
         </button>
       </div>
