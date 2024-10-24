@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import FirstWrapper from "../components/SignUp/FirstWrapper";
 import SecondWrapper from "@/components/SignUp/SecondWrapper";
-import ThirdWrapper from "@/components/SignUp/ThirdWrapper";
+// import ThirdWrapper from "@/components/SignUp/ThirdWrapper";
 
 function Login() {
   const [toggle, settoggle] = useState(false);
-  const [toggleSignUp, settoggleSignUp] = useState([true, false, false]);
+  const [toggleSignUp, settoggleSignUp] = useState([true, false]);
   const [email, setemail] = useState("");
   const [otpid, setotpid] = useState("");
 
@@ -35,9 +35,9 @@ function Login() {
                 otpid={otpid}
               />
             )}
-            {toggleSignUp[2] && (
+            {/* {toggleSignUp[2] && (
               <ThirdWrapper settoggleSignUp={settoggleSignUp} email={email}  />
-            )}
+            )} */}
           </div>
         ) : (
           <div className="flex">
