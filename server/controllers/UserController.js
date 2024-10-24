@@ -104,7 +104,9 @@ async function registerVerify(req, res) {
 
     newUser.password = null;
 
-    return res.status(200).json({ msg: "OTP Verified successfully" });
+    return res
+      .status(200)
+      .json({ msg: "OTP Verified successfully", user: newUser });
   } catch (error) {
     console.log(error);
     return res

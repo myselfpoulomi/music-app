@@ -27,8 +27,7 @@ function FirstWrapper({
   
    
     try {
-      const data = await axios.post(` http://localhost:5100/user/register/send-otp `, {username , email, password});
-      console.log(data);
+      const {data} = await axios.post(` http://localhost:5100/user/register/send-otp `, {username , email, password});
       setotpid(data.otpid);
       settoggleSignUp([false,true]);
     } catch (error) {
