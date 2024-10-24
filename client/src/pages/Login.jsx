@@ -3,7 +3,7 @@ import FirstWrapper from "../components/SignUp/FirstWrapper";
 import SecondWrapper from "@/components/SignUp/SecondWrapper";
 // import ThirdWrapper from "@/components/SignUp/ThirdWrapper";
 
-function Login() {
+function Login({setuser}) {
   const [toggle, settoggle] = useState(false);
   const [toggleSignUp, settoggleSignUp] = useState([true, false]);
   const [email, setemail] = useState("");
@@ -43,6 +43,7 @@ function Login() {
                 setusername={setusername}
                 password={password}
                 username={username}
+                setuser={setuser}
               />
             )}
             {/* {toggleSignUp[2] && (

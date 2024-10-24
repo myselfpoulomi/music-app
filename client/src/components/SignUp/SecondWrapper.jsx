@@ -5,7 +5,14 @@ import { toast } from "react-toastify";
 
 // otpid, otp (sended on email), email
 
-function SecondWrapper({ setemail, email, otpid , username, password}) {
+function SecondWrapper({
+  setemail,
+  email,
+  otpid,
+  username,
+  password,
+  setuser,
+}) {
   const [otp, setotp] = useState("");
   async function handleVerifyOTP() {
     try {
@@ -13,7 +20,8 @@ function SecondWrapper({ setemail, email, otpid , username, password}) {
         `http://localhost:5100/user/register/verify-otp`,
         { email, username, password, otpid, otp }
       );
-      
+      setuser(data.user);
+
       console.log(data);
     } catch (error) {
       toast.warning(error.response?.data?.msg || error.message);
