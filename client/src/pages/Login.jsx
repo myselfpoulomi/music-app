@@ -6,7 +6,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 
-function Login({setuser}) {
+function Login({setuser,user}) {
   const [toggle, settoggle] = useState(false);
   const [toggleSignUp, settoggleSignUp] = useState([true, false]);
   const [email, setemail] = useState("");

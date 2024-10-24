@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Nav.css";
 import { IoSearchSharp } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 import { GrHomeRounded } from "react-icons/gr";
 
-function Nav() {
+function Nav({user}) {
   const navigate = useNavigate();
+ 
   const handleLogin = () => {
     navigate("/login");
+   
   };
   function handleSearch (e) {
       const value = e.target.value;
@@ -38,7 +40,10 @@ function Nav() {
 
         {/* login n dp */}
         <div className="profile">
-          <button onClick={handleLogin}>Log In</button>
+          {
+            user!==null?<button>Log Out</button>:<button onClick={handleLogin}>Log In</button>
+          }
+
           <span className="navuser">
             <CgProfile />
           </span>

@@ -12,7 +12,7 @@ import { BiLibrary } from "react-icons/bi";
 import { GoPlusCircle } from "react-icons/go";
 import PlayList from "../components/PlayList";
 
-function Home() {
+function Home({user}) {
   const [curSong, setcurSong] = useState("");
 
   return (
@@ -35,7 +35,7 @@ function Home() {
         </div>
       </div>
       <div className="main-right scrollNone  bg-[#161717]">
-        <Nav />
+        <Nav user={user} />
         <div className="p-[10px] bg-[#232424] rounded-[10px] m-[10px]">
           <Routes>
             <Route
