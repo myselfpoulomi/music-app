@@ -7,6 +7,8 @@ function Login() {
   const [toggle, settoggle] = useState(false);
   const [toggleSignUp, settoggleSignUp] = useState([true, false]);
   const [email, setemail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const [otpid, setotpid] = useState("");
 
   return (
@@ -24,6 +26,10 @@ function Login() {
                 settoggleSignUp={settoggleSignUp}
                 setemail={setemail}
                 email={email}
+                setPassword={setPassword}
+                setusername={setUsername}
+                password={password}
+                username={username}
                 setotpid={setotpid}
               />
             )}

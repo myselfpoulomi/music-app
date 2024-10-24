@@ -6,7 +6,7 @@ const userSchema = mongoose.Schema({
     enum: ["user", "admin"],
     default: "user"
   },
-  name: {
+  username: {
     type: String,
     require: true
   },
