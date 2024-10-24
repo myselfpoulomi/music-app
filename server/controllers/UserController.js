@@ -200,10 +200,15 @@ async function loginVerifyOtp(req, res) {
   }
 }
 async function loginWithPassword(req, res) {
+  console.log("hello");
+  
   const { email, password } = req.body;
+  console.log(email,password);
   if (!email || !password) {
     return res.status(400).json({ msg: "All fields are required!" });
   }
+ 
+  
   try {
     const existingUser = await UserModel.findOne({ email });
     if (!existingUser) {
@@ -235,7 +240,7 @@ async function loginWithPassword(req, res) {
       sameSite: "None"
     });
 
-    return res.status(300).json({ user: existingUser });
+    return res.status(200).json({ user: existingUser });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ msg: "Internal server error" });

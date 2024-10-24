@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import InputOTPPattern from "./InputOTPPattern";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 // otpid, otp (sended on email), email
 
@@ -14,6 +15,7 @@ function SecondWrapper({
   setuser,
 }) {
   const [otp, setotp] = useState("");
+  const nagivate=useNavigate();
   async function handleVerifyOTP() {
     try {
       const { data } = await axios.post(
@@ -21,7 +23,8 @@ function SecondWrapper({
         { email, username, password, otpid, otp }
       );
       setuser(data.user);
-
+     
+      nagivate("/");
       console.log(data);
     } catch (error) {
       toast.warning(error.response?.data?.msg || error.message);

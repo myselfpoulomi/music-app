@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import FirstWrapper from "../components/SignUp/FirstWrapper";
 import SecondWrapper from "@/components/SignUp/SecondWrapper";
 // import ThirdWrapper from "@/components/SignUp/ThirdWrapper";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 function Login({setuser}) {
   const [toggle, settoggle] = useState(false);
@@ -10,6 +13,20 @@ function Login({setuser}) {
   const [password, setPassword] = useState("");
   const [username, setusername] = useState("");
   const [otpid, setotpid] = useState("");
+  const navigate=useNavigate();
+  async function handleLogin () {
+    try {
+      console.log(email,password);
+      
+      const data = await axios.post("http://localhost:5100/user/login/with-password",{email,password});
+      setuser(data.data.user);
+      navigate("/");
+      
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
 
   return (
     <div className="h-[100vh] w-[100vw] flex flex-col items-center justify-center bg-[rgba(14,14,14,0.9)] text-white \">
@@ -61,7 +78,7 @@ function Login({setuser}) {
                   placeholder="Enter Username"
                   className="p-6 mx-4 rounded-full w-[400px]  text-black h-[50px] outline-none"
                   onChange={(e) => {
-                    console.log(e.target.value);
+                   setemail(e.target.value);
                   }}
                 />
                 <p className="text-white p-4 mx-4">Password</p>
@@ -69,8 +86,13 @@ function Login({setuser}) {
                   type="text"
                   placeholder="Enter Password"
                   className="p-6 mx-4 rounded-full w-[400px]  text-black h-[50px] outline-none"
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
                 />
-                <button className="border border-white rounded-full p-[12px] mt-5 w-[400px] p-4 mx-4 text-white">
+                <button className="border border-white rounded-full p-[12px] mt-5 w-[400px]  mx-4 text-white"
+                onClick={handleLogin}
+                >
                   Sign In
                 </button>
               </div>
