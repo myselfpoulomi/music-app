@@ -11,17 +11,32 @@ function FirstWrapper({
   setPassword,
   password,
   settoggleSignUp,
+  setotpid
 }) {
   async function handleSendOTP() {
+    if (username==""|| email=="" || password=="") {
+      toast.warning("Fill The Require Datas");
+      return;
+    }
+
+    if (! email.includes("@") && ! email.endsWith("@example.com")) {
+      toast.warning("Wrong Email Structure");
+      return;
+    }
+
+  
+   
     try {
       const data = await axios.post(` http://localhost:5100/user/register/send-otp `, {username , email, password});
       console.log(data);
-      
+      setotpid(data.otpid);
+      settoggleSignUp([false,true]);
     } catch (error) {
       console.log(error);
       
       
     }
+    
   }
   return (
     <div className="bg-teal-900 py-[1rem] w-[500px]  flex flex-col  justify-center rounded-lg ">

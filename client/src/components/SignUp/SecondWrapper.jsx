@@ -3,23 +3,22 @@ import axios from "axios";
 import InputOTPPattern from "./InputOTPPattern";
 import { toast } from "react-toastify";
 
-
 // otpid, otp (sended on email), email
 
-function SecondWrapper({ settoggleSignUp, setemail, email, otpid }) {
+function SecondWrapper({ setemail, email, otpid , username, password}) {
   const [otp, setotp] = useState("");
   async function handleVerifyOTP() {
     try {
       const { data } = await axios.post(
         `http://localhost:5100/user/register/verify-otp`,
-        { email, otpid, otp }
+        { email, username, password, otpid, otp }
       );
-      settoggleSignUp([false, false, true]);
-      console.log(data);
       
+      console.log(data);
     } catch (error) {
-      toast.warning(error.response?.data?.msg||error.message);
-    console.log(error);}
+      toast.warning(error.response?.data?.msg || error.message);
+      console.log(error);
+    }
   }
 
   useEffect(() => {

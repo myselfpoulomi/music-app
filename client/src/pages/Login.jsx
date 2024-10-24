@@ -39,6 +39,10 @@ function Login() {
                 setemail={setemail}
                 email={email}
                 otpid={otpid}
+                setPassword={setPassword}
+                setusername={setusername}
+                password={password}
+                username={username}
               />
             )}
             {/* {toggleSignUp[2] && (
