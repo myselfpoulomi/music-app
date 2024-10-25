@@ -5,23 +5,19 @@ import { CgProfile } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 import { GrHomeRounded } from "react-icons/gr";
 
-function Nav({user}) {
+function Nav({ user }) {
+  const [toggleUsername, setToggleUsername] = useState(false);
   const navigate = useNavigate();
- 
+
   const handleLogin = () => {
     navigate("/login");
-   
   };
-  function handleSearch (e) {
-      const value = e.target.value;
-      try {
-        
-      } catch (error) {
-        
-      }
+  function handleSearch(e) {
+    const value = e.target.value;
+    try {
+    } catch (error) {}
   }
   return (
-    
     <div className="sticky top-0 bg-[rgb(24,23,23)] ">
       <nav className="navbar ">
         <GrHomeRounded
@@ -35,18 +31,37 @@ function Nav({user}) {
           <span>
             <IoSearchSharp />
           </span>
-          <input type="text" placeholder="Search Music" onChange={handleSearch} />
+          <input
+            type="text"
+            placeholder="Search Music"
+            onChange={handleSearch}
+          />
         </div>
 
         {/* login n dp */}
         <div className="profile">
-          {
-            user!==null?<button>Log Out</button>:<button onClick={handleLogin}>Log In</button>
-          }
+          {user !== null ? (
+            <button>Log Out</button>
+          ) : (
+            <button onClick={handleLogin}>Log In</button>
+          )}
 
-          <span className="navuser">
-            <CgProfile />
-          </span>
+          <div className="navuser relative">
+            <CgProfile
+              onMouseEnter={() => {
+                setToggleUsername(true);
+              }}
+              onMouseLeave={() => {
+                setToggleUsername(false);
+              }}
+            />
+            <p
+              style={{ opacity: toggleUsername ? 1 : 0 }}
+              className="transition-all ease-linear duration-200 pointer-events-none text-sm font-medium absolute top-[75%] text-center "
+            >
+              {user !== null ? user.username : ""}
+            </p>
+          </div>
         </div>
       </nav>
     </div>

@@ -11,9 +11,8 @@ async function AuthToken(req, res, next) {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.id = decoded.id;
-    req.email = decoded.email;
     req.role = decoded.role;
-    req.name = decoded.name;
+
     if (req.role !== "user") {
       return res.status(403).json({ msg: "Unauthorized" });
     }

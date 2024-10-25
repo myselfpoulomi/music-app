@@ -94,8 +94,3 @@
   color: white;
   transition: color 0.3s ease;
 }
-
-.navuser:hover {
-  color: rgb(6, 104, 104);
-  cursor: pointer;
-}

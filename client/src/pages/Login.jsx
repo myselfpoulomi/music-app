@@ -20,7 +20,8 @@ function Login({ setuser, user }) {
 
       const data = await axios.post(
         "http://localhost:5100/user/login/with-password",
-        { email, password }
+        { email, password },
+        { withCredentials: true }
       );
       setuser(data.data.user);
       sessionStorage.setItem("user", JSON.stringify(data.data.user));

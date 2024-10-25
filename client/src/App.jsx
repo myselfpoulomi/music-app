@@ -9,6 +9,7 @@ import Admin from "./pages/Admin";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Login from "./pages/Login";
+import axios from "axios";
 
 function App() {
   const [user, setuser] = useState(
@@ -16,6 +17,23 @@ function App() {
       ? JSON.parse(sessionStorage.getItem("user"))
       : null
   );
+
+  useEffect(() => {
+    async function fetchUser() {
+      try {
+        const { data } = await axios.get(
+          "http://localhost:5100/user/get-user",
+          {
+            withCredentials: true
+          }
+        );
+        setuser(data.user);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchUser();
+  }, []);
 
   return (
     <div className="containermain select-none">

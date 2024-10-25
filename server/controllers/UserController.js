@@ -201,14 +201,13 @@ async function loginVerifyOtp(req, res) {
 }
 async function loginWithPassword(req, res) {
   console.log("hello");
-  
+
   const { email, password } = req.body;
-  console.log(email,password);
+  console.log(email, password);
   if (!email || !password) {
     return res.status(400).json({ msg: "All fields are required!" });
   }
- 
-  
+
   try {
     const existingUser = await UserModel.findOne({ email });
     if (!existingUser) {
