@@ -11,8 +11,12 @@ import "react-toastify/dist/ReactToastify.css";
 import Login from "./pages/Login";
 
 function App() {
-  const [user, setuser] = useState(null);
-  
+  const [user, setuser] = useState(
+    sessionStorage.getItem("user")
+      ? JSON.parse(sessionStorage.getItem("user"))
+      : null
+  );
+
   return (
     <div className="containermain select-none">
       <Routes>

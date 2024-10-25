@@ -5,26 +5,28 @@ import SecondWrapper from "@/components/SignUp/SecondWrapper";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-
-function Login({setuser,user}) {
+function Login({ setuser, user }) {
   const [toggle, settoggle] = useState(false);
   const [toggleSignUp, settoggleSignUp] = useState([true, false]);
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setusername] = useState("");
   const [otpid, setotpid] = useState("");
-  const navigate=useNavigate();
-  async function handleLogin () {
+  const navigate = useNavigate();
+
+  async function handleLogin() {
     try {
-      console.log(email,password);
-      
-      const data = await axios.post("http://localhost:5100/user/login/with-password",{email,password});
+      console.log(email, password);
+
+      const data = await axios.post(
+        "http://localhost:5100/user/login/with-password",
+        { email, password }
+      );
       setuser(data.data.user);
+      sessionStorage.setItem("user", JSON.stringify(data.data.user));
       navigate("/");
-      
     } catch (error) {
       console.log(error);
-      
     }
   }
 
@@ -78,7 +80,7 @@ function Login({setuser,user}) {
                   placeholder="Enter Username"
                   className="p-6 mx-4 rounded-full w-[400px]  text-black h-[50px] outline-none"
                   onChange={(e) => {
-                   setemail(e.target.value);
+                    setemail(e.target.value);
                   }}
                 />
                 <p className="text-white p-4 mx-4">Password</p>
@@ -90,8 +92,9 @@ function Login({setuser,user}) {
                     setPassword(e.target.value);
                   }}
                 />
-                <button className="border border-white rounded-full p-[12px] mt-5 w-[400px]  mx-4 text-white"
-                onClick={handleLogin}
+                <button
+                  className="border border-white rounded-full p-[12px] mt-5 w-[400px]  mx-4 text-white"
+                  onClick={handleLogin}
                 >
                   Sign In
                 </button>
