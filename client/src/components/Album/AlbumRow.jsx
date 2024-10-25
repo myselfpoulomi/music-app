@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import { FaArrowLeft } from "react-icons/fa";
-import { FaArrowRight } from "react-icons/fa";
+// import { FaArrowLeft } from "react-icons/fa";
+// import { FaArrowRight } from "react-icons/fa";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { FaCirclePlay } from "react-icons/fa6";
 import AlbumCard from "./AlbumCard";
@@ -23,22 +23,22 @@ function AlbumRow() {
     getAllAlbumbs();
   }, []);
 
-  function scrollRight() {
-    if (albumContainerRef.current) {
-      albumContainerRef.current.scrollTo({
-        left: albumContainerRef.current.scrollLeft + 300,
-        behavior: "smooth"
-      });
-    }
-  }
-  function scrollLeft() {
-    if (albumContainerRef.current) {
-      albumContainerRef.current.scrollTo({
-        left: albumContainerRef.current.scrollLeft - 300,
-        behavior: "smooth"
-      });
-    }
-  }
+  // function scrollRight() {
+  //   if (albumContainerRef.current) {
+  //     albumContainerRef.current.scrollTo({
+  //       left: albumContainerRef.current.scrollLeft + 300,
+  //       behavior: "smooth"
+  //     });
+  //   }
+  // }
+  // function scrollLeft() {
+  //   if (albumContainerRef.current) {
+  //     albumContainerRef.current.scrollTo({
+  //       left: albumContainerRef.current.scrollLeft - 300,
+  //       behavior: "smooth"
+  //     });
+  //   }
+  // }
   function handleClickAlbum(id) {
     navigate(`/album/${id}`);
   }
@@ -49,10 +49,10 @@ function AlbumRow() {
         <h2 className="text-white text-[30px] pl-[30px] font-[500]">
           Popular Albums
         </h2>
-        <p className="flex gap-[20px] pr-[20px] text-lg">
+        {/* <p className="flex gap-[20px] pr-[20px] text-lg">
           <FaArrowLeft className="cursor-pointer" onClick={scrollLeft} />
           <FaArrowRight className="cursor-pointer" onClick={scrollRight} />
-        </p>
+        </p> */}
       </div>
       <div
         ref={albumContainerRef}

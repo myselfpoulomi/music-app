@@ -57,7 +57,7 @@ function Nav({ user }) {
             />
             <p
               style={{ opacity: toggleUsername ? 1 : 0 }}
-              className="transition-all ease-linear duration-200 pointer-events-none text-sm font-medium absolute top-[75%] text-center "
+              className="transition-all ease-linear duration-200 pointer-events-none text-sm font-medium absolute top-[75%] text-center bg-black p-5 rounded-md  w-[100px] right-[2px] h-[4px] flex items-center justify-center "
             >
               {user !== null ? user.username : ""}
             </p>

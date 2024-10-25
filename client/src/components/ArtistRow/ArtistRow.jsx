@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./ArtistRow.css";
 import Artistcard from "./ArtistCard/Artistcard";
-import { FaArrowLeft } from "react-icons/fa";
-import { FaArrowRight } from "react-icons/fa";
+// import { FaArrowLeft } from "react-icons/fa";
+// import { FaArrowRight } from "react-icons/fa";
 import axios from "axios";
 
 function ArtistRow() {
@@ -20,31 +20,28 @@ function ArtistRow() {
     getallArtist();
   }, []);
 
-  function slideRight() {
-    if (artistContainerRef.current) {
-      artistContainerRef.current.scrollTo({
-        left: artistContainerRef.current.scrollLeft + 300,
-        behavior: "smooth"
-      });
-    }
-  }
-  function slideLeft() {
-    if (artistContainerRef.current) {
-      artistContainerRef.current.scrollTo({
-        left: artistContainerRef.current.scrollLeft - 300,
-        behavior: "smooth"
-      });
-    }
-  }
+  // function slideRight() {
+  //   if (artistContainerRef.current) {
+  //     artistContainerRef.current.scrollTo({
+  //       left: artistContainerRef.current.scrollLeft + 300,
+  //       behavior: "smooth"
+  //     });
+  //   }
+  // }
+  // function slideLeft() {
+  //   if (artistContainerRef.current) {
+  //     artistContainerRef.current.scrollTo({
+  //       left: artistContainerRef.current.scrollLeft - 300,
+  //       behavior: "smooth"
+  //     });
+  //   }
+  // }
 
   return (
     <div className="ArtistRow">
       <div className="headingForArtist">
         <h2>Popular Artist</h2>
-        <p className="arrows">
-          <FaArrowLeft className="cursor-pointer" onClick={slideLeft} />
-          <FaArrowRight className="cursor-pointer" onClick={slideRight} />
-        </p>
+        
       </div>
       <div
         ref={artistContainerRef}
