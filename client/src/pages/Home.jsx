@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import Nav from "../components/navbar/Nav";
 import ArtistRow from "../components/ArtistRow/ArtistRow";
-
 import AlbumRow from "../components/Album/AlbumRow";
 import MusicPlayer from "../components/music/MusicPlayer";
-
 import { Routes, Route } from "react-router-dom";
 import ArtistPreview from "./ArtistPreview";
 import AlbumPreview from "./AlbumPreview";
 import { BiLibrary } from "react-icons/bi";
 import { GoPlusCircle } from "react-icons/go";
 import PlayList from "../components/PlayList";
+import PlaylistPreview from "./PlaylistPreview";
 
-function Home({user}) {
+function Home({ user }) {
   const [curSong, setcurSong] = useState("");
 
   return (
@@ -50,6 +49,7 @@ function Home({user}) {
             />
             <Route path="/artist/:id" element={<ArtistPreview />} />
             <Route path="/album/:id" element={<AlbumPreview />} />
+            <Route path="/playlist/:id" element={<PlaylistPreview />} />
           </Routes>
         </div>
       </div>

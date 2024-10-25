@@ -296,7 +296,9 @@ async function createPlaylist(req, res) {
       $push: { playlists: newPlaylist._id }
     });
 
-    return res.status(200).json({ msg: "Playlist created successfully" });
+    return res
+      .status(200)
+      .json({ msg: "Playlist created successfully", id: newPlaylist._id });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ msg: "Internal server error" });
