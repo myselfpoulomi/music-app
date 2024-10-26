@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function PlayList() {
+function PlayList({user}) {
   const navigate = useNavigate();
   async function handleCreatePlaylist() {
     try {
@@ -13,6 +13,7 @@ function PlayList() {
         { name: playlistName },
         { withCredentials: true }
       );
+      settoggle(true);
       navigate(`/playlist/${data.id}`);
     } catch (error) {
       console.log(error);

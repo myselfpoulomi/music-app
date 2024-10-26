@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Nav from "../components/navbar/Nav";
 import ArtistRow from "../components/ArtistRow/ArtistRow";
 import AlbumRow from "../components/Album/AlbumRow";
@@ -10,9 +10,14 @@ import { BiLibrary } from "react-icons/bi";
 import { GoPlusCircle } from "react-icons/go";
 import PlayList from "../components/PlayList";
 import PlaylistPreview from "./PlaylistPreview";
+import Playlist2 from "../components/Playlist2";
 
 function Home({ user }) {
   const [curSong, setcurSong] = useState("");
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
 
   return (
     <>
@@ -29,7 +34,7 @@ function Home({ user }) {
           </div>
 
           <div>
-            <PlayList />
+            {user && user.playlists.length > 0 ? <Playlist2 /> : <PlayList />}
           </div>
         </div>
       </div>
